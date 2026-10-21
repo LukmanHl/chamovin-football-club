@@ -1,0 +1,318 @@
+{
+  "adminUsers": [
+    {
+      "id": "admin_1",
+      "email": "admin@chamonvin.com",
+      "name": "Chamonvin Administration",
+      "role": "super_admin",
+      "passwordHash": "e299229bc781ae8d093930af47f69a1c1e0df22cd56cec1728ca178a33963fa4516fa2cea234d65a06e9ebb1db5b1d3017282b9d74caa4879527fa93d25c13c9",
+      "salt": "e840bc54e55c3cda8c7df9b5e3c61ac8",
+      "createdAt": "2026-10-20T12:59:24.067Z"
+    }
+  ],
+  "sessions": [],
+  "settings": {
+    "companyName": "CHAMONVIN LIMITED",
+    "logoUrl": "https://i.ibb.co/Kp7HY9pp/Whats-App-Image-2026-10-17-at-15-09-07.jpg",
+    "heroTagline": "Your vision and Goal is our Priority",
+    "heroInterval": 5000,
+    "heroSlides": [
+      {
+        "id": "slide-1",
+        "image": "/src/assets/images/hero_football_pitch_stands_1792410704308.jpg",
+        "title": "Global Sports Management & Player Representation",
+        "subtitle": "Dedicated high-quality representation for ambitious football talents, on and off the pitch."
+      },
+      {
+        "id": "slide-2",
+        "image": "/src/assets/images/hero_field_goalposts_1792410719341.jpg",
+        "title": "Strategic Career Pathways & International Opportunities",
+        "subtitle": "Helping players and clubs navigate contracts, transfers, and high-performance development."
+      },
+      {
+        "id": "slide-3",
+        "image": "/src/assets/images/hero_stadium_match_atmosphere_1792410733883.jpg",
+        "title": "International Travel, Tours & Visa Consultation",
+        "subtitle": "Flight booking consultation, family and group tour planning, and eligible visa guidance."
+      }
+    ],
+    "heroButtons": [
+      {
+        "label": "Explore Our Sports Management",
+        "link": "/sports-management"
+      },
+      {
+        "label": "Explore Travel & Visa Services",
+        "link": "/travel-tours"
+      },
+      {
+        "label": "Become a Represented Player",
+        "link": "/player-representation"
+      },
+      {
+        "label": "Book a Consultation",
+        "link": "/contact"
+      }
+    ],
+    "contactEmail": "contact@chamonvin.com",
+    "contactPhone": "+44 20 7946 0192",
+    "contactWhatsapp": "+44 7700 900192",
+    "officeAddress": "Headquarters: 18 Grosvenor Place, London SW1X 7HN / West Africa Liaison: Victoria Island, Lagos",
+    "businessHours": "Monday – Friday: 08:30 – 18:00 (GMT)",
+    "socials": {
+      "twitter": "https://twitter.com/chamonvinltd",
+      "instagram": "https://instagram.com/chamonvinltd",
+      "linkedin": "https://linkedin.com/company/chamonvin-limited",
+      "facebook": "https://facebook.com/chamonvinltd"
+    },
+    "content": {
+      "aboutOverview": "At Chamonvin Limited, our clients' priorities come first, every time. Chamonvin Limited is an international/global sports management firm specializing in soccer, football, and player representation, with extended services in travel and visa consultation. We represent amateur players, semi-professional players, professional players, managers, and teams. We continuously provide dedicated, high-quality service to our clients, whether on or off the pitch.",
+      "aboutMission": "Our mission is to empower footballers and international travelers through rigorous professional support, ethical career guidance, personalized attention, and transparent consultation that unlocks eligible global opportunities.",
+      "aboutVision": "To be recognized worldwide as a premier sports management and bespoke travel consultancy firm celebrated for integrity, client success, and sustainable career longevity.",
+      "aboutValues": "Client Priority, Absolute Integrity, International Excellence, Professional Confidentiality, and Long-Term Career Stewardship.",
+      "aboutPhilosophy": "We understand what it takes to pursue success at the highest level. We help our clients navigate their careers, identify suitable opportunities, and make informed decisions at every stage of their journey.",
+      "sportsManagementOverview": "Chamonvin Limited offers comprehensive football representation, talent management, contract guidance, and career planning across amateur, semi-professional, and professional tiers.",
+      "travelVisaOverview": "Our travel and visa division assists individuals, families, students, and professionals with travel itineraries, flight reservation support, and procedural consultation for eligible visa and residency pathways.",
+      "visaDisclaimer": "Notice & Disclaimer: All visa, work authorization, and immigration determinations are rendered solely by the relevant national government authorities and consulates. Requirements, processing times, and eligibility criteria are subject to change without notice. Chamonvin Limited provides procedural assessment, documentation guidance, and application consultation. Chamonvin Limited does not guarantee visa approval, employment offers, or permanent residence.",
+      "flightDisclaimer": "Notice: Chamonvin Limited provides travel itinerary consultation, flight schedule reviews, and reservation assistance. Final seat availability, baggage allowances, and airfares are determined by operating airlines at the time of ticket issuance.",
+      "privacyPolicy": "Chamonvin Limited treats all client inquiries, player profiles, and documentation with strict confidentiality. Personal data collected via this website is utilized strictly for consulting services and client communication in compliance with international data privacy standards.",
+      "termsConditions": "By using this website or engaging Chamonvin Limited services, you agree to our terms of service, consulting guidelines, and service disclaimers."
+    },
+    "supabase": {
+      "projectUrl": "https://gnxunqkercbqghosnbvq.supabase.co",
+      "anonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdueHVucWtlcmNicWdob3NuYnZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0MDg1NDgsImV4cCI6MjEwNzk4NDU0OH0.8E0kPfw3erzj1sQ-DeGUZEE6QFbXvIsithWWCawikko",
+      "connected": true,
+      "lastTestedAt": "2026-10-20T22:25:00.000Z"
+    }
+  },
+  "ownerProfile": {
+    "id": "owner_main",
+    "fullName": "Adekunle O.",
+    "roleTitle": "Founder & Managing Director",
+    "secondaryTitle": "International Sports Management Director & Licensed Football Intermediary",
+    "photoUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
+    "bio": "With extensive experience bridging African football talents with prominent European, UK, and international football structures, the Managing Directorate established Chamonvin Limited on foundational principles of client priority, rigorous ethical representation, and sustainable career stewardship. Overseeing both elite player management and our dedicated travel and visa consultation divisions, our mission remains focused on unlocking genuine, verified international opportunities for every client we represent.",
+    "quote": "At Chamonvin Limited, your vision and goal is our priority. Every player and client deserves genuine advocacy, complete transparency, and relentless dedication to their long-term longevity on and off the pitch.",
+    "credentials": [
+      "International Football Management & Player Representation",
+      "FIFA & Global Intermediary Network Relations",
+      "International Travel Logistics & Visa Advisory Liaison",
+      "West Africa & European Football Scouting Director"
+    ],
+    "email": "director@chamonvin.com",
+    "phone": "+44 20 7946 0192",
+    "whatsapp": "+44 7700 900192",
+    "linkedinUrl": "https://linkedin.com/company/chamonvin-limited",
+    "twitterUrl": "https://twitter.com/chamonvinltd",
+    "instagramUrl": "https://instagram.com/chamonvinltd",
+    "isPublished": true,
+    "updatedAt": "2026-10-20T22:25:00.000Z"
+  },
+  "galleryItems": [
+    {
+      "id": "gal-1",
+      "title": "European Scouting Match & Technical Assessment",
+      "category": "Scouting & Matches",
+      "imageUrl": "/src/assets/images/hero_football_pitch_stands_1792410704308.jpg",
+      "description": "Scouting delegation assessing tactical positioning and match fitness during an international exhibition encounter.",
+      "location": "Lisbon, Portugal",
+      "date": "2026 Season",
+      "isFeatured": true
+    },
+    {
+      "id": "gal-2",
+      "title": "Elite Training Pitch & Athletic Conditioning",
+      "category": "Training & Performance",
+      "imageUrl": "/src/assets/images/hero_field_goalposts_1792410719341.jpg",
+      "description": "High-performance pitch setup for individual athletic drills, ball progression, and technical development sessions.",
+      "location": "Madrid, Spain",
+      "date": "2026 Season",
+      "isFeatured": true
+    },
+    {
+      "id": "gal-3",
+      "title": "International Stadium Match Atmosphere",
+      "category": "Scouting & Matches",
+      "imageUrl": "/src/assets/images/hero_stadium_match_atmosphere_1792410733883.jpg",
+      "description": "Spectacular European matchday environment providing represented talents with firsthand exposure to top-flight competition.",
+      "location": "London, United Kingdom",
+      "date": "2026 Season",
+      "isFeatured": true
+    },
+    {
+      "id": "gal-4",
+      "title": "Tactical Analysis & Video Scouting Review",
+      "category": "Management & Events",
+      "imageUrl": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80",
+      "description": "In-depth tactical video reviews and performance data breakdown curated by Chamonvin scouting analysts for club scouts.",
+      "location": "Chamonvin HQ, London",
+      "date": "2026 Season",
+      "isFeatured": false
+    },
+    {
+      "id": "gal-5",
+      "title": "Player Contract Advisory & Management Consultation",
+      "category": "Management & Events",
+      "imageUrl": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80",
+      "description": "Transparent contract guidance, player welfare briefings, and legal representation sessions ensuring client interests are protected.",
+      "location": "Victoria Island, Lagos",
+      "date": "2026 Season",
+      "isFeatured": true
+    },
+    {
+      "id": "gal-6",
+      "title": "International Travel & Sports Delegation Gateway",
+      "category": "Travel & Tours",
+      "imageUrl": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80",
+      "description": "Seamless group flight coordination, visa facilitation, and airport logistics for traveling sports squads and delegates.",
+      "location": "Heathrow Airport, UK",
+      "date": "2026 Season",
+      "isFeatured": true
+    }
+  ],
+  "players": [
+    {
+      "id": "player_1792504140277_cb1509",
+      "fullName": "lukman",
+      "primaryPosition": "Forward",
+      "nationality": "france",
+      "age": 15,
+      "currentClub": "free agent",
+      "preferredFoot": "Right",
+      "playingLevel": "Professional",
+      "status": "published",
+      "isFeatured": false,
+      "photoUrl": "https://i.ibb.co/h1dYLJX2/Whats-App-Image-2026-10-17-at-15-10-00-1.jpg",
+      "bio": "Paste the script into the Supe SQL Editor and click Run.",
+      "careerDetails": [],
+      "videoUrl": "https://youtu.be/QD_wBK9KcBc?si=05DZb0Bv0NCaPLSV",
+      "createdAt": "2026-10-20T13:49:00.564504+00:00",
+      "updatedAt": "2026-10-20T14:02:52.158474+00:00"
+    },
+    {
+      "id": "player_1792506404428_6e009f",
+      "fullName": "ayo",
+      "primaryPosition": "Forward",
+      "nationality": "aho",
+      "age": 12,
+      "preferredFoot": "Right",
+      "playingLevel": "Professional",
+      "status": "published",
+      "isFeatured": false,
+      "photoUrl": "https://i.ibb.co/h1dYLJX2/Whats-App-Image-2026-10-17-at-15-10-00-1.jpg",
+      "bio": "hahahajajajajaj",
+      "careerDetails": [],
+      "videoUrl": "https://youtu.be/QD_wBK9KcBc?si=bh8FiZhMyHTwfHHJ",
+      "createdAt": "2026-10-20T14:26:44.58316+00:00",
+      "updatedAt": "2026-10-20T14:27:11.090711+00:00"
+    },
+    {
+      "id": "player_1792534628966_60a195",
+      "fullName": "lukman",
+      "primaryPosition": "Forward",
+      "nationality": "france",
+      "age": 16,
+      "currentClub": "free agent",
+      "preferredFoot": "Right",
+      "playingLevel": "Professional",
+      "status": "published",
+      "isFeatured": false,
+      "photoUrl": "https://i.ibb.co/h1dYLJX2/Whats-App-Image-2026-10-17-at-15-10-00-1.jpg",
+      "bio": "good to see",
+      "careerDetails": [],
+      "videoUrl": "https://youtu.be/QD_wBK9KcBc?si=XB5fuGwKsRt0eraN",
+      "createdAt": "2026-10-20T22:17:09.069505+00:00",
+      "updatedAt": "2026-10-20T22:20:25.441641+00:00"
+    }
+  ],
+  "travelPackages": [
+    {
+      "id": "pkg-1",
+      "title": "European Football Academy & Scouting Experience",
+      "destination": "Madrid & Lisbon, Europe",
+      "coverImage": "/src/assets/images/hero_football_pitch_stands_1792410704308.jpg",
+      "duration": "10 Days / 9 Nights",
+      "description": "Comprehensive sports tour package for clubs and player cohorts exploring European football infrastructure, friendly exhibition fixtures, and professional sports travel arrangements.",
+      "inclusions": [
+        "Pre-arranged accommodation near training complexes",
+        "Internal group logistics and ground transit",
+        "Itinerary coordination for training facilities",
+        "Group travel visa consultation assistance"
+      ],
+      "exclusions": [
+        "Personal spending",
+        "Individual player insurance",
+        "Unscheduled leisure tours"
+      ],
+      "price": "Inquire for Custom Itinerary",
+      "currency": "GBP",
+      "travelDates": "Spring & Summer Sessions Available",
+      "status": "published",
+      "createdAt": "2026-10-20T12:59:24.067Z",
+      "updatedAt": "2026-10-20T12:59:24.067Z"
+    },
+    {
+      "id": "pkg-2",
+      "title": "International Business & Sports Conference Gateway",
+      "destination": "London, United Kingdom",
+      "coverImage": "/src/assets/images/hero_stadium_match_atmosphere_1792410733883.jpg",
+      "duration": "5 Days / 4 Nights",
+      "description": "Tailored corporate travel itinerary for sports managers, club executives, and business professionals attending international sports summits and executive meetings.",
+      "inclusions": [
+        "Premium central hotel reservation assistance",
+        "Airport transfer coordination",
+        "Business visitor visa procedural guidance",
+        "Dedicated travel consultant support"
+      ],
+      "exclusions": [
+        "Conference registration tickets",
+        "Personal meals",
+        "Incidental hotel charges"
+      ],
+      "price": "Tailored per delegation",
+      "currency": "GBP",
+      "travelDates": "Year-Round Booking",
+      "status": "published",
+      "createdAt": "2026-10-20T12:59:24.067Z",
+      "updatedAt": "2026-10-20T12:59:24.067Z"
+    }
+  ],
+  "newsArticles": [
+    {
+      "id": "news-1",
+      "title": "Chamonvin Limited Expands International Scouting & Player Pathways",
+      "slug": "chamonvin-expands-international-scouting",
+      "coverImage": "/src/assets/images/hero_field_goalposts_1792410719341.jpg",
+      "category": "Football Management",
+      "publicationDate": "2026-10-15",
+      "author": "Management Directorate",
+      "content": "Chamonvin Limited is pleased to announce the broadening of our player representation network across key football territories.\n\nWith an uncompromising focus on player-first career planning, our sports management team works closely with amateur, semi-professional, and professional footballers. From comprehensive athletic profiling to contract advisory and relocation logistics, we ensure that every client's journey is supported with the highest standard of professionalism.\n\nProspective players and registered clubs are invited to connect directly with our sports division to explore representation and management opportunities.",
+      "status": "published",
+      "createdAt": "2026-10-20T12:59:24.067Z",
+      "updatedAt": "2026-10-20T12:59:24.067Z"
+    },
+    {
+      "id": "news-2",
+      "title": "Navigating International Visa Protocols for Athletes and Business Travelers",
+      "slug": "navigating-international-visa-protocols",
+      "coverImage": "/src/assets/images/hero_stadium_match_atmosphere_1792410733883.jpg",
+      "category": "Travel & Visa Updates",
+      "publicationDate": "2026-10-08",
+      "author": "Visa Consultation Unit",
+      "content": "Global mobility remains a cornerstone for athletes participating in trials, students pursuing overseas academic programs, and families coordinating international travel.\n\nOur dedicated travel and visa consulting unit provides structured guidance across visitor visas, study permits, business immigration pathways, and skilled employment categories. We place paramount importance on procedural accuracy, complete documentation, and transparent realistic guidance.\n\nFor consultations regarding your intended destination, reach out through our dedicated Visa Consultation portal.",
+      "status": "published",
+      "createdAt": "2026-10-20T12:59:24.067Z",
+      "updatedAt": "2026-10-20T12:59:24.067Z"
+    }
+  ],
+  "inquiries": [],
+  "auditLogs": [
+    {
+      "id": "log-1",
+      "timestamp": "2026-10-20T12:59:24.067Z",
+      "action": "SYSTEM_INIT",
+      "user": "system",
+      "details": "Initial database bootstrapped with official company parameters and secure admin role."
+    }
+  ]
+}
