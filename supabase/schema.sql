@@ -374,6 +374,13 @@ TO anon, authenticated
 USING (true)
 WITH CHECK (true);
 
+-- Explicit Permissions for all client roles
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON TABLE public.owner_profile TO anon, authenticated, service_role;
+GRANT ALL ON TABLE public.gallery_items TO anon, authenticated, service_role;
+
 -- ==============================================================================
 -- 8. INITIAL DEFAULT SETTINGS & OWNER SEED
 -- ==============================================================================
@@ -432,7 +439,18 @@ INSERT INTO public.owner_profile (
   '+44 7700 900192',
   true
 )
-ON CONFLICT (id) DO NOTHING;
+ON CONFLICT (id) DO UPDATE SET
+  full_name = EXCLUDED.full_name,
+  role_title = EXCLUDED.role_title,
+  secondary_title = EXCLUDED.secondary_title,
+  photo_url = EXCLUDED.photo_url,
+  bio = EXCLUDED.bio,
+  quote = EXCLUDED.quote,
+  credentials = EXCLUDED.credentials,
+  email = EXCLUDED.email,
+  phone = EXCLUDED.phone,
+  whatsapp = EXCLUDED.whatsapp,
+  updated_at = NOW();
 
 -- Seed Initial Gallery Items
 INSERT INTO public.gallery_items (id, title, category, image_url, description, location, date, is_featured)

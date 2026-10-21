@@ -29,11 +29,6 @@ export const AdminLoginPage: React.FC = () => {
     }
   };
 
-  const handleQuickFill = () => {
-    setEmail('admin@chamonvin.com');
-    setPassword('Chamonvin2026!');
-  };
-
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 text-white">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
@@ -113,21 +108,11 @@ export const AdminLoginPage: React.FC = () => {
             </button>
           </form>
 
-          {/* Quick Demo Access Aid */}
+          {/* Secure Portal Security Notice */}
           <div className="mt-8 pt-6 border-t border-slate-800 text-center">
-            <span className="text-[11px] text-slate-400 block mb-2">Default Setup Credentials:</span>
-            <div className="bg-slate-950 border border-slate-800 rounded-lg p-3 text-xs text-slate-300 flex items-center justify-between">
-              <div className="text-left">
-                <p><span className="text-slate-500">Email:</span> admin@chamonvin.com</p>
-                <p><span className="text-slate-500">Password:</span> Chamonvin2026!</p>
-              </div>
-              <button
-                type="button"
-                onClick={handleQuickFill}
-                className="px-2.5 py-1 text-[11px] font-semibold bg-emerald-950 border border-emerald-700 text-emerald-400 hover:bg-emerald-900 rounded"
-              >
-                Auto Fill
-              </button>
+            <div className="flex items-center justify-center gap-2 text-xs text-slate-400">
+              <Lock className="w-3.5 h-3.5 text-emerald-500" />
+              <span>Encrypted administrative session. Authorized personnel only.</span>
             </div>
           </div>
         </div>
