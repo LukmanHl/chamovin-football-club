@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Trophy, Compass, CheckCircle2, Globe, Users, Plane, FileCheck, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowRight, Trophy, Compass, CheckCircle2, Globe, Users, Plane, FileCheck } from 'lucide-react';
 import { HeroSlider } from '../components/common/HeroSlider';
 import { HomeGallery } from '../components/common/HomeGallery';
-import { OwnerCard } from '../components/common/OwnerCard';
 import { useSettings } from '../context/SettingsContext';
 import { api } from '../services/api';
 import { Player, NewsArticle } from '../types/index';
@@ -282,27 +281,7 @@ export const HomePage: React.FC = () => {
       {/* 5. MOMENTS & MATCHDAY MEDIA GALLERY */}
       <HomeGallery />
 
-      {/* 6. EXECUTIVE LEADERSHIP & FOUNDER PROFILE CARD */}
-      <section className="py-20 bg-slate-950 text-white border-t border-slate-900 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-emerald-950/80 border border-emerald-800 text-emerald-400 rounded-full text-xs font-bold uppercase tracking-wider">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Executive Leadership & Directorate</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
-              Meet Our Founder & Managing Director
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Leading Chamonvin Limited with deep international sports management expertise, ethical player representation, and verified worldwide mobility pathways.
-            </p>
-          </div>
-
-          <OwnerCard layout="full" />
-        </div>
-      </section>
-
-      {/* 7. WHY CHOOSE CHAMONVIN LIMITED */}
+      {/* 6. WHY CHOOSE CHAMONVIN LIMITED */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 block mb-2">
