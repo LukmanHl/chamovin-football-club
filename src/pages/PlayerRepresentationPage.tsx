@@ -13,7 +13,6 @@ export const PlayerRepresentationPage: React.FC = () => {
     dateOfBirth: '',
     playingLevel: 'Amateur' as PlayingLevel,
     primaryPosition: 'Forward' as PlayerPosition,
-    currentClub: '',
     experienceSummary: '',
     portfolioUrl: '',
     goalsMessage: '',
@@ -67,7 +66,6 @@ export const PlayerRepresentationPage: React.FC = () => {
           dateOfBirth: formData.dateOfBirth,
           playingLevel: formData.playingLevel,
           primaryPosition: formData.primaryPosition,
-          currentClub: formData.currentClub,
           experienceSummary: formData.experienceSummary,
           portfolioUrl: formData.portfolioUrl,
           goalsMessage: formData.goalsMessage
@@ -193,7 +191,6 @@ export const PlayerRepresentationPage: React.FC = () => {
                         dateOfBirth: '',
                         playingLevel: 'Amateur',
                         primaryPosition: 'Forward',
-                        currentClub: '',
                         experienceSummary: '',
                         portfolioUrl: '',
                         goalsMessage: '',
@@ -269,7 +266,7 @@ export const PlayerRepresentationPage: React.FC = () => {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. +44 7700 900192"
+                      placeholder="e.g. +1(909)-991-3946 or +234..."
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full px-3.5 py-2 text-xs sm:text-sm border border-slate-300 rounded-md focus:ring-2 focus:ring-emerald-600 focus:outline-none"
@@ -323,7 +320,7 @@ export const PlayerRepresentationPage: React.FC = () => {
 
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                      Date of Birth
+                      Year of Birth / Date of Birth
                     </label>
                     <input
                       type="date"
@@ -332,19 +329,6 @@ export const PlayerRepresentationPage: React.FC = () => {
                       className="w-full px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded-md focus:ring-2 focus:ring-emerald-600 focus:outline-none"
                     />
                   </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                    Current Club / Academy (if applicable)
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Free Agent or current team name"
-                    value={formData.currentClub}
-                    onChange={(e) => setFormData({ ...formData, currentClub: e.target.value })}
-                    className="w-full px-3.5 py-2 text-xs sm:text-sm border border-slate-300 rounded-md focus:ring-2 focus:ring-emerald-600 focus:outline-none"
-                  />
                 </div>
 
                 <div>

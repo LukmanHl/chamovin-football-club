@@ -302,9 +302,9 @@ CREATE TABLE IF NOT EXISTS public.owner_profile (
   bio TEXT NOT NULL DEFAULT 'With extensive experience bridging African football talents with prominent European, UK, and international football structures, the Managing Directorate established Chamonvin Limited on foundational principles of client priority, rigorous ethical representation, and sustainable career stewardship.',
   quote TEXT DEFAULT 'At Chamonvin Limited, your vision and goal is our priority. Every player and client deserves genuine advocacy, complete transparency, and relentless dedication to their long-term longevity on and off the pitch.',
   credentials TEXT[] DEFAULT ARRAY['International Football Management & Player Representation', 'FIFA & Global Intermediary Network Relations', 'International Travel Logistics & Visa Advisory Liaison', 'West Africa & European Football Scouting Director'],
-  email TEXT DEFAULT 'director@chamonvin.com',
-  phone TEXT DEFAULT '+44 20 7946 0192',
-  whatsapp TEXT DEFAULT '+44 7700 900192',
+  email TEXT DEFAULT 'info@Chamonvin.com',
+  phone TEXT DEFAULT '+1(909)-991-3946',
+  whatsapp TEXT DEFAULT '+2348145656705',
   linkedin_url TEXT DEFAULT 'https://linkedin.com/company/chamonvin-limited',
   twitter_url TEXT DEFAULT 'https://twitter.com/chamonvinltd',
   instagram_url TEXT DEFAULT 'https://instagram.com/chamonvinltd',
@@ -336,9 +336,9 @@ INSERT INTO public.owner_profile (
   'With extensive experience bridging African football talents with prominent European, UK, and international football structures, the Managing Directorate established Chamonvin Limited on foundational principles of client priority, rigorous ethical representation, and sustainable career stewardship.',
   'At Chamonvin Limited, your vision and goal is our priority. Every player and client deserves genuine advocacy, complete transparency, and relentless dedication to their long-term longevity on and off the pitch.',
   ARRAY['International Football Management & Player Representation', 'FIFA & Global Intermediary Network Relations', 'International Travel Logistics & Visa Advisory Liaison', 'West Africa & European Football Scouting Director'],
-  'director@chamonvin.com',
-  '+44 20 7946 0192',
-  '+44 7700 900192',
+  'info@Chamonvin.com',
+  '+1(909)-991-3946',
+  '+2348145656705',
   true
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1008,7 +1008,7 @@ GRANT ALL ON TABLE public.gallery_items TO anon, authenticated, service_role;
                     type="text"
                     value={ownerProfile.phone || ''}
                     onChange={(e) => setOwnerProfile({ ...ownerProfile, phone: e.target.value })}
-                    placeholder="+44 20 7946 0192"
+                    placeholder="+1(909)-991-3946"
                     className="w-full px-3 py-2 text-xs border border-slate-300 rounded focus:outline-none"
                   />
                 </div>
@@ -1018,7 +1018,7 @@ GRANT ALL ON TABLE public.gallery_items TO anon, authenticated, service_role;
                     type="text"
                     value={ownerProfile.whatsapp || ''}
                     onChange={(e) => setOwnerProfile({ ...ownerProfile, whatsapp: e.target.value })}
-                    placeholder="+44 7700 900192"
+                    placeholder="+2348145656705"
                     className="w-full px-3 py-2 text-xs border border-slate-300 rounded focus:outline-none"
                   />
                 </div>

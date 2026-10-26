@@ -111,11 +111,11 @@ CREATE TABLE IF NOT EXISTS public.company_settings (
   hero_interval INTEGER NOT NULL DEFAULT 5000,
   hero_slides JSONB NOT NULL DEFAULT '[]'::jsonb,
   hero_buttons JSONB NOT NULL DEFAULT '[]'::jsonb,
-  contact_email TEXT NOT NULL DEFAULT 'contact@chamonvin.com',
-  contact_phone TEXT NOT NULL DEFAULT '+44 20 7946 0192',
-  contact_whatsapp TEXT DEFAULT '+44 7700 900192',
-  office_address TEXT DEFAULT 'Headquarters: 18 Grosvenor Place, London SW1X 7HN / West Africa Liaison: Victoria Island, Lagos',
-  business_hours TEXT DEFAULT 'Monday – Friday: 08:30 – 18:00 (GMT)',
+  contact_email TEXT NOT NULL DEFAULT 'info@Chamonvin.com',
+  contact_phone TEXT NOT NULL DEFAULT '+1(909)-991-3946',
+  contact_whatsapp TEXT DEFAULT '+2348145656705',
+  office_address TEXT DEFAULT 'Address: California, USA',
+  business_hours TEXT DEFAULT 'Monday – Sunday: 24 Hours (24/7 Service)',
   socials JSONB DEFAULT '{"twitter":"","instagram":"","linkedin":"","facebook":""}'::jsonb,
   content JSONB NOT NULL DEFAULT '{}'::jsonb,
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
@@ -127,10 +127,8 @@ CREATE TABLE IF NOT EXISTS public.players (
   full_name TEXT NOT NULL,
   primary_position player_position_enum NOT NULL,
   nationality TEXT NOT NULL,
+  year_of_birth INTEGER,
   date_of_birth DATE,
-  age INTEGER,
-  current_club TEXT,
-  preferred_foot preferred_foot_enum DEFAULT 'Right',
   playing_level playing_level_enum NOT NULL DEFAULT 'Professional',
   status content_status_enum NOT NULL DEFAULT 'published',
   is_featured BOOLEAN NOT NULL DEFAULT FALSE,
@@ -220,9 +218,9 @@ CREATE TABLE IF NOT EXISTS public.owner_profile (
   bio TEXT NOT NULL DEFAULT 'With extensive experience bridging African football talents with prominent European, UK, and international football structures, the Managing Directorate established Chamonvin Limited on foundational principles of client priority, rigorous ethical representation, and sustainable career stewardship. Overseeing both elite player management and our dedicated travel and visa consultation divisions, our mission remains focused on unlocking genuine, verified international opportunities for every client we represent.',
   quote TEXT DEFAULT 'At Chamonvin Limited, your vision and goal is our priority. Every player and client deserves genuine advocacy, complete transparency, and relentless dedication to their long-term longevity on and off the pitch.',
   credentials TEXT[] DEFAULT ARRAY['International Football Management & Player Representation', 'FIFA & Global Intermediary Network Relations', 'International Travel Logistics & Visa Advisory Liaison', 'West Africa & European Football Scouting Director'],
-  email TEXT DEFAULT 'director@chamonvin.com',
-  phone TEXT DEFAULT '+44 20 7946 0192',
-  whatsapp TEXT DEFAULT '+44 7700 900192',
+  email TEXT DEFAULT 'info@Chamonvin.com',
+  phone TEXT DEFAULT '+1(909)-991-3946',
+  whatsapp TEXT DEFAULT '+2348145656705',
   linkedin_url TEXT DEFAULT 'https://linkedin.com/company/chamonvin-limited',
   twitter_url TEXT DEFAULT 'https://twitter.com/chamonvinltd',
   instagram_url TEXT DEFAULT 'https://instagram.com/chamonvinltd',
@@ -237,7 +235,7 @@ CREATE TABLE IF NOT EXISTS public.gallery_items (
   title TEXT NOT NULL,
   category TEXT NOT NULL DEFAULT 'Scouting & Matches',
   image_url TEXT NOT NULL,
-  description TEXT NOT NULL,
+  description TEXT DEFAULT '',
   location TEXT,
   date TEXT,
   is_featured BOOLEAN NOT NULL DEFAULT TRUE,
@@ -401,11 +399,11 @@ INSERT INTO public.company_settings (
   'https://i.ibb.co/Kp7HY9pp/Whats-App-Image-2026-10-17-at-15-09-07.jpg',
   'Your vision and Goal is our Priority',
   5000,
-  'contact@chamonvin.com',
-  '+44 20 7946 0192',
-  '+44 7700 900192',
-  'Headquarters: 18 Grosvenor Place, London SW1X 7HN / West Africa Liaison: Victoria Island, Lagos',
-  'Monday – Friday: 08:30 – 18:00 (GMT)'
+  'info@Chamonvin.com',
+  '+1(909)-991-3946',
+  '+2348145656705',
+  'Address: California, USA',
+  'Monday – Sunday: 24 Hours (24/7 Service)'
 )
 ON CONFLICT (id) DO UPDATE SET
   logo_url = EXCLUDED.logo_url,
@@ -434,9 +432,9 @@ INSERT INTO public.owner_profile (
   'With extensive experience bridging African football talents with prominent European, UK, and international football structures, the Managing Directorate established Chamonvin Limited on foundational principles of client priority, rigorous ethical representation, and sustainable career stewardship.',
   'At Chamonvin Limited, your vision and goal is our priority. Every player and client deserves genuine advocacy, complete transparency, and relentless dedication to their long-term longevity on and off the pitch.',
   ARRAY['International Football Management & Player Representation', 'FIFA & Global Intermediary Network Relations', 'International Travel Logistics & Visa Advisory Liaison', 'West Africa & European Football Scouting Director'],
-  'director@chamonvin.com',
-  '+44 20 7946 0192',
-  '+44 7700 900192',
+  'info@Chamonvin.com',
+  '+1(909)-991-3946',
+  '+2348145656705',
   true
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -455,10 +453,10 @@ ON CONFLICT (id) DO UPDATE SET
 -- Seed Initial Gallery Items
 INSERT INTO public.gallery_items (id, title, category, image_url, description, location, date, is_featured)
 VALUES 
-  ('gal-1', 'European Scouting Match & Technical Assessment', 'Scouting & Matches', '/src/assets/images/hero_football_pitch_stands_1792410704308.jpg', 'Scouting delegation assessing tactical positioning and match fitness during an international exhibition encounter.', 'Lisbon, Portugal', '2026 Season', true),
-  ('gal-2', 'Elite Training Pitch & Athletic Conditioning', 'Training & Performance', '/src/assets/images/hero_field_goalposts_1792410719341.jpg', 'High-performance pitch setup for individual athletic drills, ball progression, and technical development sessions.', 'Madrid, Spain', '2026 Season', true),
-  ('gal-3', 'International Stadium Match Atmosphere', 'Scouting & Matches', '/src/assets/images/hero_stadium_match_atmosphere_1792410733883.jpg', 'Spectacular European matchday environment providing represented talents with firsthand exposure to top-flight competition.', 'London, United Kingdom', '2026 Season', true),
-  ('gal-4', 'Tactical Analysis & Video Scouting Review', 'Management & Events', 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80', 'In-depth tactical video reviews and performance data breakdown curated by Chamonvin scouting analysts for club scouts.', 'Chamonvin HQ, London', '2026 Season', false),
-  ('gal-5', 'Player Contract Advisory & Management Consultation', 'Management & Events', 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80', 'Transparent contract guidance, player welfare briefings, and legal representation sessions ensuring client interests are protected.', 'Victoria Island, Lagos', '2026 Season', true),
-  ('gal-6', 'International Travel & Sports Delegation Gateway', 'Travel & Tours', 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80', 'Seamless group flight coordination, visa facilitation, and airport logistics for traveling sports squads and delegates.', 'Heathrow Airport, UK', '2026 Season', true)
+  ('gal-1', 'European Scouting Match & Technical Assessment', 'Scouting & Matches', '/src/assets/images/hero_football_pitch_stands_1792410704308.jpg', '', 'Lisbon, Portugal', '2026 Season', true),
+  ('gal-2', 'Elite Training Pitch & Athletic Conditioning', 'Training & Performance', '/src/assets/images/hero_field_goalposts_1792410719341.jpg', '', 'Madrid, Spain', '2026 Season', true),
+  ('gal-3', 'International Stadium Match Atmosphere', 'Scouting & Matches', '/src/assets/images/hero_stadium_match_atmosphere_1792410733883.jpg', '', 'London, United Kingdom', '2026 Season', true),
+  ('gal-4', 'Tactical Analysis & Video Scouting Review', 'Management & Events', 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80', '', 'Chamonvin HQ, London', '2026 Season', false),
+  ('gal-5', 'Player Contract Advisory & Management Consultation', 'Management & Events', 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80', '', 'Victoria Island, Lagos', '2026 Season', true),
+  ('gal-6', 'International Travel & Sports Delegation Gateway', 'Travel & Tours', 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80', '', 'Heathrow Airport, UK', '2026 Season', true)
 ON CONFLICT (id) DO NOTHING;

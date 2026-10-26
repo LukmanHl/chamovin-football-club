@@ -33,10 +33,8 @@ async function syncPlayerToSupabase(player: any, action: 'upsert' | 'delete') {
         full_name: player.fullName,
         primary_position: player.primaryPosition,
         nationality: player.nationality,
-        date_of_birth: player.dateOfBirth || null,
-        age: player.age || null,
-        current_club: player.currentClub || null,
-        preferred_foot: player.preferredFoot || 'Right',
+        year_of_birth: player.yearOfBirth ? parseInt(String(player.yearOfBirth), 10) : (player.dateOfBirth ? parseInt(player.dateOfBirth.slice(0, 4), 10) : null),
+        date_of_birth: player.dateOfBirth || (player.yearOfBirth ? `${player.yearOfBirth}-01-01` : null),
         playing_level: player.playingLevel || 'Amateur',
         status: player.status || 'published',
         is_featured: Boolean(player.isFeatured),
@@ -167,10 +165,8 @@ async function pullPlayersFromSupabase() {
         fullName: row.full_name,
         primaryPosition: row.primary_position,
         nationality: row.nationality,
+        yearOfBirth: row.year_of_birth || (row.date_of_birth ? String(row.date_of_birth).slice(0, 4) : row.age ? (new Date().getFullYear() - row.age) : undefined),
         dateOfBirth: row.date_of_birth || undefined,
-        age: row.age || undefined,
-        currentClub: row.current_club || undefined,
-        preferredFoot: row.preferred_foot || 'Right',
         playingLevel: row.playing_level || 'Professional',
         status: row.status || 'published',
         isFeatured: Boolean(row.is_featured),
@@ -191,8 +187,8 @@ async function pullPlayersFromSupabase() {
 }
 
 const app = express();
-const PORT = Number(process.env.PORT) || 3000;
-const isProduction = process.env.NODE_ENV === 'production';
+const PORT = process.env.PORT || 3000;
+const isProduction = process.env.NODE_ENV === 'production' || !fs.existsSync(path.resolve(process.cwd(), 'src', 'App.tsx'));
 
 // Ensure upload directory exists
 const UPLOADS_DIR = path.resolve(process.cwd(), 'public', 'uploads');
@@ -264,6 +260,23 @@ function requireAdmin(req: Request, res: Response, next: NextFunction) {
   (req as any).user = session;
   next();
 }
+
+// Download routes for deployment packages
+app.get(['/dist.zip', '/download/dist.zip'], (_req: Request, res: Response) => {
+  const filePath = path.resolve(process.cwd(), 'dist.zip');
+  if (fs.existsSync(filePath)) {
+    return res.download(filePath, 'dist.zip');
+  }
+  return res.status(404).send('dist.zip not found');
+});
+
+app.get(['/chamonvin-full-deployment.zip', '/download/full-deployment.zip'], (_req: Request, res: Response) => {
+  const filePath = path.resolve(process.cwd(), 'chamonvin-full-deployment.zip');
+  if (fs.existsSync(filePath)) {
+    return res.download(filePath, 'chamonvin-full-deployment.zip');
+  }
+  return res.status(404).send('chamonvin-full-deployment.zip not found');
+});
 
 // ================= API ROUTES =================
 
@@ -911,24 +924,51 @@ app.delete('/api/gallery/:id', requireAdmin, async (req: Request, res: Response)
 });
 
 // ================= FRONTEND MOUNTING =================
+process.on('uncaughtException', (err) => {
+  console.error('[Server] Uncaught Exception:', err);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('[Server] Unhandled Rejection:', reason);
+});
+
 async function startServer() {
-  if (!isProduction) {
-    const { createServer: createViteServer } = await import('vite');
-    const vite = await createViteServer({
-      server: { middlewareMode: true }
-    });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path.resolve(process.cwd(), 'dist');
+  const distIndexExists = fs.existsSync(path.resolve(process.cwd(), 'dist', 'index.html'));
+  const rootIndexExists = fs.existsSync(path.resolve(process.cwd(), 'index.html'));
+  const shouldServeStatic = isProduction || distIndexExists || rootIndexExists;
+
+  if (shouldServeStatic) {
+    const distPath = distIndexExists
+      ? path.resolve(process.cwd(), 'dist')
+      : (rootIndexExists ? process.cwd() : path.resolve(process.cwd(), 'dist'));
     app.use(express.static(distPath));
     app.get('*', (_req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
+  } else {
+    try {
+      const { createServer: createViteServer } = await import('vite');
+      const vite = await createViteServer({
+        server: { middlewareMode: true }
+      });
+      app.use(vite.middlewares);
+    } catch {
+      console.warn('[Server] Vite not found, falling back to static files');
+      const distPath = path.resolve(process.cwd(), 'dist');
+      if (fs.existsSync(distPath)) {
+        app.use(express.static(distPath));
+        app.get('*', (_req, res) => {
+          res.sendFile(path.join(distPath, 'index.html'));
+        });
+      }
+    }
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server listening on http://0.0.0.0:${PORT}`);
+  // Bind to PORT without hardcoded host so Phusion Passenger and proxies work cleanly
+  app.listen(PORT, () => {
+    console.log(`[Server] Listening on ${PORT}`);
   });
 }
 
 startServer();
+
+export default app;

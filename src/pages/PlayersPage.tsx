@@ -31,8 +31,7 @@ export const PlayersPage: React.FC = () => {
   const filteredPlayers = players.filter((player) => {
     const matchesSearch =
       player.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      player.nationality.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (player.currentClub && player.currentClub.toLowerCase().includes(searchQuery.toLowerCase()));
+      player.nationality.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesPosition =
       positionFilter === 'All' ||
@@ -173,19 +172,16 @@ export const PlayersPage: React.FC = () => {
                       {player.fullName}
                     </h3>
 
-                    {player.currentClub && (
-                      <p className="text-xs text-slate-600 mb-3">
-                        <strong className="text-slate-700">Club:</strong> {player.currentClub}
+                    {(player.yearOfBirth || player.dateOfBirth || player.age) && (
+                      <p className="text-xs text-slate-500 mb-3">
+                        <strong className="text-slate-700">Year of Birth:</strong>{' '}
+                        {player.yearOfBirth || (player.dateOfBirth ? player.dateOfBirth.slice(0, 4) : player.age ? (new Date().getFullYear() - player.age) : '—')}
                       </p>
                     )}
 
-                    <p className="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed mb-4">
-                      {player.bio}
-                    </p>
-
-                    {player.preferredFoot && (
-                      <p className="text-xs text-slate-500">
-                        <strong className="text-slate-700">Preferred Foot:</strong> {player.preferredFoot}
+                    {player.bio && (
+                      <p className="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                        {player.bio}
                       </p>
                     )}
                   </div>

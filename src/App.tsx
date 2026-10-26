@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import { SettingsProvider } from './context/SettingsContext';
 import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
+import { FloatingWhatsApp } from './components/common/FloatingWhatsApp';
 
 // Public Pages
 import { HomePage } from './pages/HomePage';
@@ -29,14 +30,23 @@ import { AdminPlayersPage } from './pages/admin/AdminPlayersPage';
 import { AdminInquiriesPage } from './pages/admin/AdminInquiriesPage';
 import { AdminTravelPage } from './pages/admin/AdminTravelPage';
 import { AdminNewsPage } from './pages/admin/AdminNewsPage';
+import { AdminGalleryPage } from './pages/admin/AdminGalleryPage';
 import { AdminAppearancePage } from './pages/admin/AdminAppearancePage';
 import { AdminSettingsPage } from './pages/admin/AdminSettingsPage';
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    if (hash) {
+      const targetId = hash.replace('#', '');
+      const el = document.getElementById(targetId);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
+        return;
+      }
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 }
 
@@ -46,6 +56,7 @@ const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 };
@@ -171,6 +182,7 @@ export default function App() {
               <Route index element={<AdminOverviewPage />} />
               <Route path="players" element={<AdminPlayersPage />} />
               <Route path="inquiries" element={<AdminInquiriesPage />} />
+              <Route path="gallery" element={<AdminGalleryPage />} />
               <Route path="travel" element={<AdminTravelPage />} />
               <Route path="news" element={<AdminNewsPage />} />
               <Route path="appearance" element={<AdminAppearancePage />} />

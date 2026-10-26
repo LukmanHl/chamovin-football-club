@@ -152,7 +152,7 @@ export const PlayerDetailPage: React.FC = () => {
             {/* Quick Specs Card */}
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 space-y-3 text-xs sm:text-sm">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 pb-2 border-b border-slate-200">
-                Player Specifications
+                Player Details & Specifications
               </h3>
               <div className="flex justify-between py-1 border-b border-slate-100">
                 <span className="text-slate-500">Position</span>
@@ -162,28 +162,16 @@ export const PlayerDetailPage: React.FC = () => {
                 <span className="text-slate-500">Nationality</span>
                 <span className="font-semibold text-slate-900">{player.nationality}</span>
               </div>
-              {player.currentClub && (
-                <div className="flex justify-between py-1 border-b border-slate-100">
-                  <span className="text-slate-500">Current Club</span>
-                  <span className="font-semibold text-slate-900">{player.currentClub}</span>
-                </div>
-              )}
-              {player.preferredFoot && (
-                <div className="flex justify-between py-1 border-b border-slate-100">
-                  <span className="text-slate-500">Preferred Foot</span>
-                  <span className="font-semibold text-slate-900">{player.preferredFoot}</span>
-                </div>
-              )}
-              {player.age && (
-                <div className="flex justify-between py-1 border-b border-slate-100">
-                  <span className="text-slate-500">Age</span>
-                  <span className="font-semibold text-slate-900">{player.age} Years</span>
-                </div>
-              )}
-              {player.dateOfBirth && (
+              <div className="flex justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500">Playing Level</span>
+                <span className="font-semibold text-slate-900">{player.playingLevel}</span>
+              </div>
+              {(player.yearOfBirth || player.dateOfBirth || player.age) && (
                 <div className="flex justify-between py-1">
-                  <span className="text-slate-500">Date of Birth</span>
-                  <span className="font-semibold text-slate-900">{player.dateOfBirth}</span>
+                  <span className="text-slate-500">Year of Birth</span>
+                  <span className="font-semibold text-slate-900 font-mono">
+                    {player.yearOfBirth || (player.dateOfBirth ? player.dateOfBirth.slice(0, 4) : player.age ? (new Date().getFullYear() - player.age) : '—')}
+                  </span>
                 </div>
               )}
             </div>
@@ -217,15 +205,17 @@ export const PlayerDetailPage: React.FC = () => {
               </p>
             </div>
 
-            {/* Biography */}
-            <div className="space-y-4">
-              <h2 className="text-lg font-bold text-slate-950 pb-2 border-b border-slate-200">
-                Player Biography & Profile
-              </h2>
-              <p className="text-sm sm:text-base text-slate-700 leading-relaxed whitespace-pre-line">
-                {player.bio}
-              </p>
-            </div>
+            {/* Biography (Optional - only displayed if provided) */}
+            {player.bio && player.bio.trim() && (
+              <div className="space-y-4">
+                <h2 className="text-lg font-bold text-slate-950 pb-2 border-b border-slate-200">
+                  Player Biography & Profile
+                </h2>
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed whitespace-pre-line">
+                  {player.bio}
+                </p>
+              </div>
+            )}
 
             {/* Verified Career Details / Achievements */}
             {player.careerDetails && player.careerDetails.length > 0 && (

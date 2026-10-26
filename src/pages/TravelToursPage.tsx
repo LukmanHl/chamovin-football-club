@@ -299,7 +299,7 @@ export const TravelToursPage: React.FC = () => {
                     <input
                       type="text"
                       required
-                      placeholder="+44..."
+                      placeholder="+1(909)-991-3946 or +234..."
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       className="w-full px-3 py-2 text-xs border border-slate-300 rounded-md focus:ring-2 focus:ring-emerald-600 focus:outline-none"

@@ -130,7 +130,7 @@ export const AboutPage: React.FC = () => {
       </section>
 
       {/* Executive Leadership & Founder's Profile */}
-      <section className="py-20 bg-slate-950 text-white relative overflow-hidden border-b border-slate-900">
+      <section id="leadership" className="py-20 bg-slate-950 text-white relative overflow-hidden border-b border-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest block">

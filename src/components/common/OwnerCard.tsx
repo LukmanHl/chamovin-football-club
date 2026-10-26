@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldCheck, Award, Mail, Phone, MessageSquare, Linkedin, ExternalLink, Quote, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ShieldCheck, Award, Mail, Phone, MessageSquare, Linkedin, ExternalLink, Quote, Sparkles, ArrowRight } from 'lucide-react';
 import { api } from '../../services/api';
 import { OwnerProfile } from '../../types/index';
 
 interface OwnerCardProps {
-  layout?: 'full' | 'compact' | 'featured';
+  layout?: 'full' | 'compact' | 'featured' | 'home';
   className?: string;
 }
 
@@ -39,6 +40,64 @@ export const OwnerCard: React.FC<OwnerCardProps> = ({ layout = 'full', className
   }
 
   if (!profile || !profile.isPublished) return null;
+
+  if (layout === 'home') {
+    return (
+      <div className={`bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white rounded-2xl sm:rounded-3xl border border-slate-800 shadow-xl relative overflow-hidden p-6 sm:p-8 lg:p-10 ${className}`}>
+        {/* Ambient background glow */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-60 h-60 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
+
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
+          {/* Owner Identity: Photo + Name */}
+          <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-6 text-center sm:text-left">
+            <div className="relative shrink-0">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-emerald-500/50 shadow-2xl bg-slate-950 p-1">
+                <img
+                  src={profile.photoUrl}
+                  alt={profile.fullName}
+                  className="w-full h-full object-cover rounded-xl"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:-right-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow">
+                Founder
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <div className="flex items-center justify-center sm:justify-start gap-1.5 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Executive Directorate</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                {profile.fullName}
+              </h3>
+              <p className="text-xs sm:text-sm text-emerald-300 font-medium">
+                {profile.roleTitle}
+              </p>
+              {profile.secondaryTitle && (
+                <p className="text-xs text-slate-400 max-w-md hidden sm:block">
+                  {profile.secondaryTitle}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Action Button Directing User to About Us Page */}
+          <div className="shrink-0 w-full sm:w-auto text-center sm:text-right">
+            <Link
+              to="/about#leadership"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-xs sm:text-sm rounded-xl transition-all shadow-md hover:shadow-emerald-900/40 group"
+            >
+              <span>View Entire Profile on About Us</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (layout === 'compact') {
     return (

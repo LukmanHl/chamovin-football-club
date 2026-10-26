@@ -32,9 +32,9 @@ var DEFAULT_OWNER_PROFILE = {
     "International Travel Logistics & Visa Advisory Liaison",
     "West Africa & European Football Scouting Director"
   ],
-  email: "director@chamonvin.com",
-  phone: "+44 20 7946 0192",
-  whatsapp: "+44 7700 900192",
+  email: "info@Chamonvin.com",
+  phone: "+1(909)-991-3946",
+  whatsapp: "+2348145656705",
   linkedinUrl: "https://linkedin.com/company/chamonvin-limited",
   twitterUrl: "https://twitter.com/chamonvinltd",
   instagramUrl: "https://instagram.com/chamonvinltd",
@@ -134,11 +134,11 @@ var DEFAULT_SETTINGS = {
     { label: "Become a Represented Player", link: "/player-representation" },
     { label: "Book a Consultation", link: "/contact" }
   ],
-  contactEmail: "contact@chamonvin.com",
-  contactPhone: "+44 20 7946 0192",
-  contactWhatsapp: "+44 7700 900192",
-  officeAddress: "Headquarters: 18 Grosvenor Place, London SW1X 7HN / West Africa Liaison: Victoria Island, Lagos",
-  businessHours: "Monday \u2013 Friday: 08:30 \u2013 18:00 (GMT)",
+  contactEmail: "info@Chamonvin.com",
+  contactPhone: "+1(909)-991-3946",
+  contactWhatsapp: "+2348145656705",
+  officeAddress: "Address: California, USA",
+  businessHours: "Monday \u2013 Sunday: 24 Hours (24/7 Service)",
   socials: {
     twitter: "https://twitter.com/chamonvinltd",
     instagram: "https://instagram.com/chamonvinltd",
@@ -718,10 +718,8 @@ async function syncPlayerToSupabase(player, action) {
         full_name: player.fullName,
         primary_position: player.primaryPosition,
         nationality: player.nationality,
-        date_of_birth: player.dateOfBirth || null,
-        age: player.age || null,
-        current_club: player.currentClub || null,
-        preferred_foot: player.preferredFoot || "Right",
+        year_of_birth: player.yearOfBirth ? parseInt(String(player.yearOfBirth), 10) : player.dateOfBirth ? parseInt(player.dateOfBirth.slice(0, 4), 10) : null,
+        date_of_birth: player.dateOfBirth || (player.yearOfBirth ? `${player.yearOfBirth}-01-01` : null),
         playing_level: player.playingLevel || "Amateur",
         status: player.status || "published",
         is_featured: Boolean(player.isFeatured),
@@ -847,10 +845,8 @@ async function pullPlayersFromSupabase() {
         fullName: row.full_name,
         primaryPosition: row.primary_position,
         nationality: row.nationality,
+        yearOfBirth: row.year_of_birth || (row.date_of_birth ? String(row.date_of_birth).slice(0, 4) : row.age ? (/* @__PURE__ */ new Date()).getFullYear() - row.age : void 0),
         dateOfBirth: row.date_of_birth || void 0,
-        age: row.age || void 0,
-        currentClub: row.current_club || void 0,
-        preferredFoot: row.preferred_foot || "Right",
         playingLevel: row.playing_level || "Professional",
         status: row.status || "published",
         isFeatured: Boolean(row.is_featured),
@@ -870,8 +866,8 @@ async function pullPlayersFromSupabase() {
   return null;
 }
 var app = express();
-var PORT = Number(process.env.PORT) || 3e3;
-var isProduction = process.env.NODE_ENV === "production";
+var PORT = process.env.PORT || 3e3;
+var isProduction = process.env.NODE_ENV === "production" || !fs2.existsSync(path2.resolve(process.cwd(), "src", "App.tsx"));
 var UPLOADS_DIR = path2.resolve(process.cwd(), "public", "uploads");
 if (!fs2.existsSync(UPLOADS_DIR)) {
   fs2.mkdirSync(UPLOADS_DIR, { recursive: true });
@@ -932,6 +928,20 @@ function requireAdmin(req, res, next) {
   req.user = session;
   next();
 }
+app.get(["/dist.zip", "/download/dist.zip"], (_req, res) => {
+  const filePath = path2.resolve(process.cwd(), "dist.zip");
+  if (fs2.existsSync(filePath)) {
+    return res.download(filePath, "dist.zip");
+  }
+  return res.status(404).send("dist.zip not found");
+});
+app.get(["/chamonvin-full-deployment.zip", "/download/full-deployment.zip"], (_req, res) => {
+  const filePath = path2.resolve(process.cwd(), "chamonvin-full-deployment.zip");
+  if (fs2.existsSync(filePath)) {
+    return res.download(filePath, "chamonvin-full-deployment.zip");
+  }
+  return res.status(404).send("chamonvin-full-deployment.zip not found");
+});
 app.post("/api/auth/login", checkRateLimit, (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -1493,22 +1503,46 @@ app.delete("/api/gallery/:id", requireAdmin, async (req, res) => {
   syncGalleryItemToSupabase({ id: req.params.id }, "delete");
   return res.json({ success: true });
 });
+process.on("uncaughtException", (err) => {
+  console.error("[Server] Uncaught Exception:", err);
+});
+process.on("unhandledRejection", (reason) => {
+  console.error("[Server] Unhandled Rejection:", reason);
+});
 async function startServer() {
-  if (!isProduction) {
-    const { createServer: createViteServer } = await import("vite");
-    const vite = await createViteServer({
-      server: { middlewareMode: true }
-    });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path2.resolve(process.cwd(), "dist");
+  const distIndexExists = fs2.existsSync(path2.resolve(process.cwd(), "dist", "index.html"));
+  const rootIndexExists = fs2.existsSync(path2.resolve(process.cwd(), "index.html"));
+  const shouldServeStatic = isProduction || distIndexExists || rootIndexExists;
+  if (shouldServeStatic) {
+    const distPath = distIndexExists ? path2.resolve(process.cwd(), "dist") : rootIndexExists ? process.cwd() : path2.resolve(process.cwd(), "dist");
     app.use(express.static(distPath));
     app.get("*", (_req, res) => {
       res.sendFile(path2.join(distPath, "index.html"));
     });
+  } else {
+    try {
+      const { createServer: createViteServer } = await import("vite");
+      const vite = await createViteServer({
+        server: { middlewareMode: true }
+      });
+      app.use(vite.middlewares);
+    } catch {
+      console.warn("[Server] Vite not found, falling back to static files");
+      const distPath = path2.resolve(process.cwd(), "dist");
+      if (fs2.existsSync(distPath)) {
+        app.use(express.static(distPath));
+        app.get("*", (_req, res) => {
+          res.sendFile(path2.join(distPath, "index.html"));
+        });
+      }
+    }
   }
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server listening on http://0.0.0.0:${PORT}`);
+  app.listen(PORT, () => {
+    console.log(`[Server] Listening on ${PORT}`);
   });
 }
 startServer();
+var server_default = app;
+export {
+  server_default as default
+};

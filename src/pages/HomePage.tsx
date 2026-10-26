@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Trophy, Compass, CheckCircle2, Globe, Users, Plane, FileCheck } from 'lucide-react';
 import { HeroSlider } from '../components/common/HeroSlider';
 import { HomeGallery } from '../components/common/HomeGallery';
+import { OwnerCard } from '../components/common/OwnerCard';
 import { useSettings } from '../context/SettingsContext';
 import { api } from '../services/api';
 import { Player, NewsArticle } from '../types/index';
@@ -178,7 +179,12 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. FEATURED PLAYERS DIRECTORY (Empty state compliant - NO FAKE PLAYERS) */}
+      {/* 4. EXECUTIVE LEADERSHIP / OWNER CARD (Name, photo & direct link to full profile on About Us) */}
+      <section className="py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <OwnerCard layout="home" />
+      </section>
+
+      {/* 5. FEATURED PLAYERS DIRECTORY (Empty state compliant - NO FAKE PLAYERS) */}
       <section className="py-16 bg-slate-50 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10 gap-4">

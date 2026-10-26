@@ -12,6 +12,7 @@ import {
   Clock,
   ShieldCheck,
   CheckCircle2,
+  Camera,
   Database
 } from 'lucide-react';
 import { api } from '../../services/api';
@@ -105,6 +106,13 @@ export const AdminOverviewPage: React.FC = () => {
           >
             <PlusCircle className="w-3.5 h-3.5" />
             <span>Add Player Profile</span>
+          </Link>
+          <Link
+            to="/admin/gallery"
+            className="px-3.5 py-2 text-xs font-semibold text-slate-900 bg-white border border-slate-300 hover:bg-slate-50 rounded-md transition-colors flex items-center gap-1.5"
+          >
+            <Camera className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Media Gallery</span>
           </Link>
           <Link
             to="/admin/inquiries"

@@ -83,61 +83,90 @@ export const ContactPage: React.FC = () => {
             </div>
 
             <div className="space-y-6 text-xs sm:text-sm">
+              {/* Direct Emails */}
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                    Direct Email
+                <div className="space-y-1">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
+                    Official Email Addresses
                   </span>
-                  <a
-                    href={`mailto:${settings?.contactEmail || 'contact@chamonvin.com'}`}
-                    className="font-semibold text-slate-900 hover:text-emerald-700 transition-colors"
-                  >
-                    {settings?.contactEmail || 'contact@chamonvin.com'}
-                  </a>
+                  <div>
+                    <span className="text-[11px] text-slate-500 block">Primary Inquiries:</span>
+                    <a
+                      href="mailto:info@Chamonvin.com"
+                      className="font-bold text-slate-900 hover:text-emerald-700 transition-colors text-sm"
+                    >
+                      {settings?.contactEmail || 'info@Chamonvin.com'}
+                    </a>
+                  </div>
+                  <div className="pt-1">
+                    <span className="text-[11px] text-slate-500 block">Alternative Contact:</span>
+                    <a
+                      href="mailto:chamonvin@live.com"
+                      className="font-semibold text-slate-700 hover:text-emerald-700 transition-colors"
+                    >
+                      chamonvin@live.com
+                    </a>
+                  </div>
                 </div>
               </div>
 
+              {/* Telephone Numbers */}
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
+                <div className="space-y-1">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
+                    Telephone Channels
+                  </span>
+                  <div>
+                    <span className="text-[11px] text-slate-500 block">United States (USA):</span>
+                    <a
+                      href="tel:+19099913946"
+                      className="font-bold text-slate-900 hover:text-emerald-700 transition-colors text-sm"
+                    >
+                      +1(909)-991-3946
+                    </a>
+                  </div>
+                  <div className="pt-1">
+                    <span className="text-[11px] text-slate-500 block">International / West Africa:</span>
+                    <a
+                      href="tel:+2348145656705"
+                      className="font-semibold text-slate-700 hover:text-emerald-700 transition-colors"
+                    >
+                      +2348145656705
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* WhatsApp Direct Line */}
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
+                  <MessageSquare className="w-5 h-5" />
+                </div>
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                    Telephone
+                    WhatsApp Direct Line
                   </span>
                   <a
-                    href={`tel:${settings?.contactPhone || '+442079460192'}`}
-                    className="font-semibold text-slate-900 hover:text-emerald-700 transition-colors"
+                    href="https://wa.me/2348145656705"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-emerald-700 hover:text-emerald-800 transition-colors text-sm flex items-center gap-1.5"
                   >
-                    {settings?.contactPhone || '+44 20 7946 0192'}
+                    <span>+2348145656705</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">
+                      Chat Active
+                    </span>
                   </a>
                 </div>
               </div>
 
-              {settings?.contactWhatsapp && (
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
-                    <MessageSquare className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                      WhatsApp Messaging
-                    </span>
-                    <a
-                      href={`https://wa.me/${settings.contactWhatsapp.replace(/[^0-9]/g, '')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-emerald-700 hover:text-emerald-800 transition-colors"
-                    >
-                      {settings.contactWhatsapp}
-                    </a>
-                  </div>
-                </div>
-              )}
-
+              {/* Operating Hours */}
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
                   <Clock className="w-5 h-5" />
@@ -146,22 +175,23 @@ export const ContactPage: React.FC = () => {
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
                     Operating Hours
                   </span>
-                  <span className="text-slate-700">
-                    {settings?.businessHours || 'Monday – Friday: 08:30 – 18:00 (GMT)'}
+                  <span className="text-slate-700 font-semibold text-slate-900">
+                    {settings?.businessHours || 'Monday – Sunday: 24 Hours (24/7 Support)'}
                   </span>
                 </div>
               </div>
 
+              {/* Address */}
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                    Office Address
+                    Physical Location
                   </span>
-                  <span className="text-slate-700">
-                    {settings?.officeAddress || 'London & International Liaison Offices'}
+                  <span className="font-semibold text-slate-900 text-sm block">
+                    {settings?.officeAddress || 'Address: California, USA'}
                   </span>
                 </div>
               </div>
@@ -270,7 +300,7 @@ export const ContactPage: React.FC = () => {
                       <input
                         type="text"
                         required
-                        placeholder="+44 7700 900192"
+                        placeholder="+1(909)-991-3946 or +234..."
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
                         className="w-full px-3 py-2 text-xs border border-slate-300 rounded-md focus:ring-2 focus:ring-emerald-600 focus:outline-none"

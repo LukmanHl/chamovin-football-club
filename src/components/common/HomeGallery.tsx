@@ -47,7 +47,7 @@ export const HomeGallery: React.FC = () => {
     : items.filter(item => item.category === selectedCategory);
 
   return (
-    <section className="py-20 bg-slate-950 text-white relative overflow-hidden border-t border-slate-900">
+    <section id="gallery" className="py-20 bg-slate-950 text-white relative overflow-hidden border-t border-slate-900 scroll-mt-20">
       {/* Background ambient light */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -124,32 +124,26 @@ export const HomeGallery: React.FC = () => {
                       <Maximize2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
-
-                  {/* Bottom Image Overlay Details */}
-                  <div className="absolute bottom-3 left-3 right-3 text-left">
-                    {item.location && (
-                      <div className="flex items-center gap-1 text-[11px] text-emerald-400 font-semibold mb-1">
-                        <MapPin className="w-3 h-3" />
-                        <span>{item.location}</span>
-                      </div>
-                    )}
-                    <h3 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors line-clamp-1">
-                      {item.title}
-                    </h3>
-                  </div>
                 </div>
 
-                {/* Card Footer Text */}
-                <div className="p-4 bg-slate-900/90 text-left border-t border-slate-800/80">
-                  <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
-                    {item.description}
-                  </p>
-                  {item.date && (
-                    <div className="flex items-center gap-1.5 text-[10px] text-slate-500 mt-2 font-medium">
-                      <Calendar className="w-3 h-3" />
-                      <span>{item.date}</span>
-                    </div>
-                  )}
+                {/* Card Bottom: Title only (write-ups removed) */}
+                <div className="p-4 bg-slate-900 text-left border-t border-slate-800 space-y-1.5">
+                  <h3 className="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors line-clamp-2 leading-snug">
+                    {item.title}
+                  </h3>
+                  <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+                    {item.location ? (
+                      <span className="flex items-center gap-1 text-emerald-400 truncate">
+                        <MapPin className="w-3 h-3 shrink-0" />
+                        <span className="truncate">{item.location}</span>
+                      </span>
+                    ) : <span />}
+                    {item.date && (
+                      <span className="text-slate-500 font-mono text-[10px] shrink-0">
+                        {item.date}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
@@ -204,13 +198,12 @@ export const HomeGallery: React.FC = () => {
               />
             </div>
 
-            {/* Modal Footer Caption */}
-            <div className="p-5 sm:p-6 bg-slate-900/90 border-t border-slate-800 space-y-1.5">
+            {/* Modal Footer Caption: Title and metadata only, no write-up */}
+            <div className="p-5 sm:p-6 bg-slate-900/90 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <h3 className="text-base sm:text-lg font-bold text-white">{activeItem.title}</h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{activeItem.description}</p>
               {activeItem.date && (
-                <span className="text-[11px] text-slate-500 block pt-1 font-mono">
-                  Recorded: {activeItem.date}
+                <span className="text-xs text-slate-400 font-mono">
+                  {activeItem.date}
                 </span>
               )}
             </div>

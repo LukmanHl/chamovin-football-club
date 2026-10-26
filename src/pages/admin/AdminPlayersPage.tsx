@@ -41,10 +41,8 @@ export const AdminPlayersPage: React.FC = () => {
     fullName: '',
     primaryPosition: 'Forward' as PlayerPosition,
     nationality: '',
-    age: '',
+    yearOfBirth: '',
     dateOfBirth: '',
-    currentClub: '',
-    preferredFoot: 'Right' as 'Left' | 'Right' | 'Both',
     playingLevel: 'Professional' as PlayingLevel,
     status: 'published' as 'published' | 'draft',
     isFeatured: false,
@@ -101,15 +99,13 @@ export const AdminPlayersPage: React.FC = () => {
       fullName: player.fullName,
       primaryPosition: player.primaryPosition,
       nationality: player.nationality,
-      age: player.age ? String(player.age) : '',
+      yearOfBirth: player.yearOfBirth ? String(player.yearOfBirth) : (player.dateOfBirth ? player.dateOfBirth.slice(0, 4) : player.age ? String(new Date().getFullYear() - player.age) : ''),
       dateOfBirth: player.dateOfBirth || '',
-      currentClub: player.currentClub || '',
-      preferredFoot: player.preferredFoot || 'Right',
       playingLevel: player.playingLevel,
       status: player.status,
       isFeatured: player.isFeatured,
       photoUrl: player.photoUrl,
-      bio: player.bio,
+      bio: player.bio || '',
       careerDetails: player.careerDetails || [],
       newCareerItem: '',
       videoUrl: player.videoUrl || ''
@@ -164,17 +160,15 @@ export const AdminPlayersPage: React.FC = () => {
         fullName: form.fullName.trim(),
         primaryPosition: form.primaryPosition,
         nationality: form.nationality.trim(),
-        age: form.age ? parseInt(form.age, 10) : undefined,
-        dateOfBirth: form.dateOfBirth || undefined,
-        currentClub: form.currentClub.trim() || undefined,
-        preferredFoot: form.preferredFoot,
+        yearOfBirth: form.yearOfBirth.trim() || undefined,
+        dateOfBirth: form.dateOfBirth || (form.yearOfBirth.trim() ? `${form.yearOfBirth.trim()}-01-01` : undefined),
         playingLevel: form.playingLevel,
         status: form.status,
         isFeatured: form.isFeatured,
         photoUrl: form.photoUrl.trim(),
-        bio: form.bio.trim(),
+        bio: form.bio ? form.bio.trim() : '',
         careerDetails: form.careerDetails,
-        videoUrl: form.videoUrl.trim() || undefined
+        videoUrl: form.videoUrl ? form.videoUrl.trim() : undefined
       };
 
       if (editingId) {
@@ -228,8 +222,7 @@ export const AdminPlayersPage: React.FC = () => {
   const filtered = players.filter(p => {
     const matchesSearch =
       p.fullName.toLowerCase().includes(search.toLowerCase()) ||
-      p.nationality.toLowerCase().includes(search.toLowerCase()) ||
-      (p.currentClub && p.currentClub.toLowerCase().includes(search.toLowerCase()));
+      p.nationality.toLowerCase().includes(search.toLowerCase());
 
     const matchesLevel = filterLevel === 'All' || p.playingLevel === filterLevel;
     const matchesStatus = filterStatus === 'All' || p.status === filterStatus;
@@ -342,7 +335,7 @@ export const AdminPlayersPage: React.FC = () => {
                   <th className="py-3.5 px-4">Position</th>
                   <th className="py-3.5 px-4">Level</th>
                   <th className="py-3.5 px-4">Nationality</th>
-                  <th className="py-3.5 px-4">Club</th>
+                  <th className="py-3.5 px-4">Year of Birth</th>
                   <th className="py-3.5 px-4">Status</th>
                   <th className="py-3.5 px-4 text-right">Actions</th>
                 </tr>
@@ -378,7 +371,9 @@ export const AdminPlayersPage: React.FC = () => {
                       </span>
                     </td>
                     <td className="py-3 px-4 text-slate-600">{player.nationality}</td>
-                    <td className="py-3 px-4 text-slate-600">{player.currentClub || '—'}</td>
+                    <td className="py-3 px-4 text-slate-600 font-mono">
+                      {player.yearOfBirth || (player.dateOfBirth ? player.dateOfBirth.slice(0, 4) : player.age ? (new Date().getFullYear() - player.age) : '—')}
+                    </td>
                     <td className="py-3 px-4">
                       <button
                         onClick={() => handleToggleStatus(player)}
@@ -502,38 +497,15 @@ export const AdminPlayersPage: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Preferred Foot</label>
-                  <select
-                    value={form.preferredFoot}
-                    onChange={(e) => setForm({ ...form, preferredFoot: e.target.value as any })}
-                    className="w-full px-3 py-2 text-xs border border-slate-300 rounded-md bg-white focus:ring-2 focus:ring-emerald-600 focus:outline-none"
-                  >
-                    <option value="Right">Right</option>
-                    <option value="Left">Left</option>
-                    <option value="Both">Both Feet</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Current Club / Academy</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Year of Birth
+                  </label>
                   <input
                     type="text"
-                    placeholder="e.g. Free Agent or club name"
-                    value={form.currentClub}
-                    onChange={(e) => setForm({ ...form, currentClub: e.target.value })}
-                    className="w-full px-3 py-2 text-xs border border-slate-300 rounded-md focus:ring-2 focus:ring-emerald-600 focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Age / Date of Birth</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. 21 or 2004-06-12"
-                    value={form.age}
-                    onChange={(e) => setForm({ ...form, age: e.target.value })}
-                    className="w-full px-3 py-2 text-xs border border-slate-300 rounded-md focus:ring-2 focus:ring-emerald-600 focus:outline-none"
+                    placeholder="e.g. 2004"
+                    value={form.yearOfBirth}
+                    onChange={(e) => setForm({ ...form, yearOfBirth: e.target.value })}
+                    className="w-full px-3 py-2 text-xs border border-slate-300 rounded-md focus:ring-2 focus:ring-emerald-600 focus:outline-none font-mono"
                   />
                 </div>
               </div>
@@ -592,11 +564,12 @@ export const AdminPlayersPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Player Biography *</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  Player Biography <span className="text-slate-400 font-normal">(Optional)</span>
+                </label>
                 <textarea
                   rows={3}
-                  required
-                  placeholder="Summary of player style, strengths, experience..."
+                  placeholder="Summary of player style, strengths, experience (optional)..."
                   value={form.bio}
                   onChange={(e) => setForm({ ...form, bio: e.target.value })}
                   className="w-full px-3 py-2 text-xs border border-slate-300 rounded-md focus:ring-2 focus:ring-emerald-600 focus:outline-none"

@@ -22,6 +22,7 @@ export const Header: React.FC = () => {
     { label: 'About Us', path: '/about' },
     { label: 'Sports Management', path: '/sports-management' },
     { label: 'Our Players', path: '/players' },
+    { label: 'Gallery', path: '/#gallery' },
     { label: 'Player Representation', path: '/player-representation' },
     { label: 'Travel & Tours', path: '/travel-tours' },
     { label: 'Visa Consultation', path: '/visa-consultation' },

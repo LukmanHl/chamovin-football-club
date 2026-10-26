@@ -87,6 +87,7 @@ export interface Player {
   fullName: string;
   primaryPosition: PlayerPosition;
   nationality: string;
+  yearOfBirth?: number | string;
   dateOfBirth?: string;
   age?: number;
   currentClub?: string;
@@ -95,7 +96,7 @@ export interface Player {
   status: 'published' | 'draft';
   isFeatured: boolean;
   photoUrl: string;
-  bio: string;
+  bio?: string;
   careerDetails: string[];
   videoUrl?: string;
   createdAt: string;
@@ -198,7 +199,7 @@ export interface GalleryItem {
   title: string;
   category: 'Scouting & Matches' | 'Training & Performance' | 'Travel & Tours' | 'Management & Events';
   imageUrl: string;
-  description: string;
+  description?: string;
   location?: string;
   date?: string;
   isFeatured?: boolean;

@@ -27,11 +27,11 @@ export const Footer: React.FC = () => {
             <div className="pt-2 text-xs text-slate-400 space-y-1">
               <p className="flex items-center gap-2">
                 <Clock className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                <span>{settings?.businessHours || 'Monday – Friday: 08:30 – 18:00 (GMT)'}</span>
+                <span>{settings?.businessHours || 'Monday – Sunday: 24 Hours (24/7 Service)'}</span>
               </p>
               <p className="flex items-center gap-2">
                 <MapPin className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                <span>{settings?.officeAddress || 'London & International Liaison Offices'}</span>
+                <span>{settings?.officeAddress || 'Address: California, USA'}</span>
               </p>
             </div>
           </div>
@@ -48,6 +48,11 @@ export const Footer: React.FC = () => {
               <li>
                 <Link to="/players" className="hover:text-emerald-400 transition-colors">
                   Our Players Directory
+                </Link>
+              </li>
+              <li>
+                <Link to="/#gallery" className="hover:text-emerald-400 transition-colors">
+                  Match & Training Gallery
                 </Link>
               </li>
               <li>
@@ -103,32 +108,48 @@ export const Footer: React.FC = () => {
           {/* Contact Details Column */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Direct Inquiries</h4>
-            <div className="space-y-2.5 text-xs text-slate-300">
+            <div className="space-y-2 text-xs text-slate-300">
               <a
-                href={`mailto:${settings?.contactEmail || 'contact@chamonvin.com'}`}
+                href="mailto:info@Chamonvin.com"
                 className="flex items-center gap-2 hover:text-emerald-400 transition-colors"
+                title="Primary Inquiries Email"
               >
                 <Mail className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                <span className="truncate">{settings?.contactEmail || 'contact@chamonvin.com'}</span>
+                <span className="truncate">{settings?.contactEmail || 'info@Chamonvin.com'}</span>
               </a>
               <a
-                href={`tel:${settings?.contactPhone || '+442079460192'}`}
+                href="mailto:chamonvin@live.com"
+                className="flex items-center gap-2 text-slate-400 hover:text-emerald-400 transition-colors text-[11px]"
+                title="Alternative Email"
+              >
+                <Mail className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                <span className="truncate">chamonvin@live.com</span>
+              </a>
+              <a
+                href="tel:+19099913946"
                 className="flex items-center gap-2 hover:text-emerald-400 transition-colors"
+                title="United States Office"
               >
                 <Phone className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                <span>{settings?.contactPhone || '+44 20 7946 0192'}</span>
+                <span>+1(909)-991-3946</span>
               </a>
-              {settings?.contactWhatsapp && (
-                <a
-                  href={`https://wa.me/${settings.contactWhatsapp.replace(/[^0-9]/g, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors"
-                >
-                  <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
-                  <span>WhatsApp: {settings.contactWhatsapp}</span>
-                </a>
-              )}
+              <a
+                href="tel:+2348145656705"
+                className="flex items-center gap-2 text-slate-400 hover:text-emerald-400 transition-colors text-[11px]"
+                title="International & West Africa Line"
+              >
+                <Phone className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                <span>+2348145656705</span>
+              </a>
+              <a
+                href="https://wa.me/2348145656705"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors"
+              >
+                <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+                <span>WhatsApp: +2348145656705</span>
+              </a>
               <div className="pt-2">
                 <Link
                   to="/contact"

@@ -10,7 +10,14 @@
       "createdAt": "2026-10-20T12:59:24.067Z"
     }
   ],
-  "sessions": [],
+  "sessions": [
+    {
+      "token": "f1623001c70ca6e3f327b372c231824be5e249517a9ca47b6ce49124ba2e2fa6",
+      "userId": "admin_1",
+      "email": "admin@chamonvin.com",
+      "expiresAt": 1793094440858
+    }
+  ],
   "settings": {
     "companyName": "CHAMONVIN LIMITED",
     "logoUrl": "https://i.ibb.co/Kp7HY9pp/Whats-App-Image-2026-10-17-at-15-09-07.jpg",
@@ -54,11 +61,11 @@
         "link": "/contact"
       }
     ],
-    "contactEmail": "contact@chamonvin.com",
-    "contactPhone": "+44 20 7946 0192",
-    "contactWhatsapp": "+44 7700 900192",
-    "officeAddress": "Headquarters: 18 Grosvenor Place, London SW1X 7HN / West Africa Liaison: Victoria Island, Lagos",
-    "businessHours": "Monday – Friday: 08:30 – 18:00 (GMT)",
+    "contactEmail": "info@Chamonvin.com",
+    "contactPhone": "+1(909)-991-3946",
+    "contactWhatsapp": "+2348145656705",
+    "officeAddress": "Address: California, USA",
+    "businessHours": "Monday – Sunday: 24 Hours (24/7 Service)",
     "socials": {
       "twitter": "https://twitter.com/chamonvinltd",
       "instagram": "https://instagram.com/chamonvinltd",
@@ -99,9 +106,9 @@
       "International Travel Logistics & Visa Advisory Liaison",
       "West Africa & European Football Scouting Director"
     ],
-    "email": "director@chamonvin.com",
-    "phone": "+44 20 7946 0192",
-    "whatsapp": "+44 7700 900192",
+    "email": "info@Chamonvin.com",
+    "phone": "+1(909)-991-3946",
+    "whatsapp": "+2348145656705",
     "linkedinUrl": "https://linkedin.com/company/chamonvin-limited",
     "twitterUrl": "https://twitter.com/chamonvinltd",
     "instagramUrl": "https://instagram.com/chamonvinltd",
@@ -172,48 +179,11 @@
   ],
   "players": [
     {
-      "id": "player_1792504140277_cb1509",
-      "fullName": "lukman",
-      "primaryPosition": "Forward",
-      "nationality": "france",
-      "age": 15,
-      "currentClub": "free agent",
-      "preferredFoot": "Right",
-      "playingLevel": "Professional",
-      "status": "published",
-      "isFeatured": false,
-      "photoUrl": "https://i.ibb.co/h1dYLJX2/Whats-App-Image-2026-10-17-at-15-10-00-1.jpg",
-      "bio": "Paste the script into the Supe SQL Editor and click Run.",
-      "careerDetails": [],
-      "videoUrl": "https://youtu.be/QD_wBK9KcBc?si=05DZb0Bv0NCaPLSV",
-      "createdAt": "2026-10-20T13:49:00.564504+00:00",
-      "updatedAt": "2026-10-20T14:02:52.158474+00:00"
-    },
-    {
-      "id": "player_1792506404428_6e009f",
-      "fullName": "ayo",
-      "primaryPosition": "Forward",
-      "nationality": "aho",
-      "age": 12,
-      "preferredFoot": "Right",
-      "playingLevel": "Professional",
-      "status": "published",
-      "isFeatured": false,
-      "photoUrl": "https://i.ibb.co/h1dYLJX2/Whats-App-Image-2026-10-17-at-15-10-00-1.jpg",
-      "bio": "hahahajajajajaj",
-      "careerDetails": [],
-      "videoUrl": "https://youtu.be/QD_wBK9KcBc?si=bh8FiZhMyHTwfHHJ",
-      "createdAt": "2026-10-20T14:26:44.58316+00:00",
-      "updatedAt": "2026-10-20T14:27:11.090711+00:00"
-    },
-    {
       "id": "player_1792534628966_60a195",
       "fullName": "lukman",
       "primaryPosition": "Forward",
       "nationality": "france",
-      "age": 16,
-      "currentClub": "free agent",
-      "preferredFoot": "Right",
+      "yearOfBirth": 2010,
       "playingLevel": "Professional",
       "status": "published",
       "isFeatured": false,
@@ -222,7 +192,7 @@
       "careerDetails": [],
       "videoUrl": "https://youtu.be/QD_wBK9KcBc?si=XB5fuGwKsRt0eraN",
       "createdAt": "2026-10-20T22:17:09.069505+00:00",
-      "updatedAt": "2026-10-20T22:20:25.441641+00:00"
+      "updatedAt": "2026-10-23T17:32:33.613549+00:00"
     }
   ],
   "travelPackages": [
@@ -307,6 +277,20 @@
   ],
   "inquiries": [],
   "auditLogs": [
+    {
+      "id": "log_1793008438550_83d6",
+      "timestamp": "2026-10-26T09:53:58.550Z",
+      "action": "SETTINGS_UPDATE",
+      "user": "admin@chamonvin.com",
+      "details": "Updated company settings and appearance"
+    },
+    {
+      "id": "log_1793008040859_023e",
+      "timestamp": "2026-10-26T09:47:20.859Z",
+      "action": "LOGIN_SUCCESS",
+      "user": "admin@chamonvin.com",
+      "details": "Successful login from ::ffff:127.0.0.1"
+    },
     {
       "id": "log-1",
       "timestamp": "2026-10-20T12:59:24.067Z",
