@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldAlert, CheckCircle2, Send, AlertCircle, Users, Briefcase, GraduationCap, Plane, Home, Award } from 'lucide-react';
+import { CheckCircle2, Send, AlertCircle, Users, Briefcase, GraduationCap, Plane, Home, Award } from 'lucide-react';
 import { api } from '../services/api';
 import { useSettings } from '../context/SettingsContext';
 
@@ -116,22 +116,6 @@ export const VisaConsultationPage: React.FC = () => {
           </p>
         </div>
       </div>
-
-      {/* Prominent Regulatory Disclaimer Banner */}
-      <section className="bg-amber-50 border-b border-amber-200 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-start gap-3">
-            <ShieldAlert className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
-            <div className="text-xs text-amber-900 leading-relaxed space-y-1">
-              <strong className="font-bold uppercase tracking-wider block">Important Legal Notice & Consultation Disclaimer:</strong>
-              <p>
-                {settings?.content.visaDisclaimer ||
-                  'All visa, entry clearance, and immigration decisions are made exclusively by the relevant national government authorities and consulates. Requirements, processing timelines, and eligibility criteria may change without notice. Chamonvin Limited provides procedural assessment, documentation guidance, and application consultation. Consultation does not guarantee visa approval, employment offers, or permanent residency.'}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Categories Grid */}
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

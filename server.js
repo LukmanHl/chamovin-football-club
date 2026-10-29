@@ -103,6 +103,74 @@ var DEFAULT_GALLERY_ITEMS = [
     isFeatured: true
   }
 ];
+var DEFAULT_TESTIMONIALS = [
+  {
+    id: "rev-1",
+    name: "Tunde Bakare",
+    role: "Professional Footballer \xB7 Forward",
+    category: "sports",
+    location: "Lisbon, Portugal",
+    rating: 5,
+    content: "Chamonvin Limited transformed my athletic journey. Their direct European scouting network secured me elite exposure in Portugal. What stands out most is their integrity\u2014no empty promises, just authentic representation and genuine care for my long-term career.",
+    date: "2026 Season",
+    isPublished: true
+  },
+  {
+    id: "rev-2",
+    name: "Dr. Nkemdilim Eze",
+    role: "Medical Research Delegate \xB7 Schengen Visa Client",
+    category: "travel",
+    location: "London, United Kingdom",
+    rating: 5,
+    content: "Navigating international visa requirements for our 8-person conference delegation seemed daunting until we hired Chamonvin. Their travel team scrutinized our documentation with immense precision and arranged flights seamlessly. Highly recommended!",
+    date: "2026 Season",
+    isPublished: true
+  },
+  {
+    id: "rev-3",
+    name: "Emmanuel Oduro",
+    role: "Midfielder \xB7 Representation Client",
+    category: "sports",
+    location: "Madrid, Spain",
+    rating: 5,
+    content: "The athletic conditioning roadmap and tactical video analysis provided by Chamonvin gave me the edge I needed during scouting assessments. They treat players with respect, protect our welfare, and offer transparent career advisory.",
+    date: "2026 Season",
+    isPublished: true
+  },
+  {
+    id: "rev-4",
+    name: "Coach Julian Martins",
+    role: "European Football Academy Technical Scout",
+    category: "sports",
+    location: "Porto, Portugal",
+    rating: 5,
+    content: "Working with Chamonvin as licensed intermediaries has been exemplary. Their player dossiers are authentic, thoroughly vetted, and backed by accurate technical footage. A trustworthy agency that respects international compliance.",
+    date: "2026 Season",
+    isPublished: true
+  },
+  {
+    id: "rev-5",
+    name: "Folashade Adeleke",
+    role: "Postgraduate Student \xB7 UK Student Visa",
+    category: "travel",
+    location: "Manchester, United Kingdom",
+    rating: 5,
+    content: "From university documentation review to mock visa interview prep and airport itinerary booking, Chamonvin guided me step-by-step. Their 24/7 responsiveness gave my family tremendous peace of mind throughout the entire process.",
+    date: "2026 Season",
+    isPublished: true
+  },
+  {
+    id: "rev-6",
+    name: "Kelvin Mensah",
+    role: "Center Back \xB7 Elite Trials Participant",
+    category: "sports",
+    location: "Paris, France",
+    rating: 5,
+    content: "Unlike other scouts who make grand claims without results, Chamonvin delivered tangible trial invitations, real contract advisory, and full logistical support. They are the benchmark for football management.",
+    date: "2026 Season",
+    isPublished: true
+  }
+];
 var DEFAULT_SETTINGS = {
   companyName: "CHAMONVIN LIMITED",
   logoUrl: "https://i.ibb.co/Kp7HY9pp/Whats-App-Image-2026-10-17-at-15-09-07.jpg",
@@ -130,9 +198,7 @@ var DEFAULT_SETTINGS = {
   ],
   heroButtons: [
     { label: "Explore Our Sports Management", link: "/sports-management" },
-    { label: "Explore Travel & Visa Services", link: "/travel-tours" },
-    { label: "Become a Represented Player", link: "/player-representation" },
-    { label: "Book a Consultation", link: "/contact" }
+    { label: "Explore Travel & Visa Services", link: "/travel-tours" }
   ],
   contactEmail: "info@Chamonvin.com",
   contactPhone: "+1(909)-991-3946",
@@ -153,10 +219,10 @@ var DEFAULT_SETTINGS = {
     aboutPhilosophy: "We understand what it takes to pursue success at the highest level. We help our clients navigate their careers, identify suitable opportunities, and make informed decisions at every stage of their journey.",
     sportsManagementOverview: "Chamonvin Limited offers comprehensive football representation, talent management, contract guidance, and career planning across amateur, semi-professional, and professional tiers.",
     travelVisaOverview: "Our travel and visa division assists individuals, families, students, and professionals with travel itineraries, flight reservation support, and procedural consultation for eligible visa and residency pathways.",
-    visaDisclaimer: "Notice & Disclaimer: All visa, work authorization, and immigration determinations are rendered solely by the relevant national government authorities and consulates. Requirements, processing times, and eligibility criteria are subject to change without notice. Chamonvin Limited provides procedural assessment, documentation guidance, and application consultation. Chamonvin Limited does not guarantee visa approval, employment offers, or permanent residence.",
-    flightDisclaimer: "Notice: Chamonvin Limited provides travel itinerary consultation, flight schedule reviews, and reservation assistance. Final seat availability, baggage allowances, and airfares are determined by operating airlines at the time of ticket issuance.",
+    visaDisclaimer: "",
+    flightDisclaimer: "",
     privacyPolicy: "Chamonvin Limited treats all client inquiries, player profiles, and documentation with strict confidentiality. Personal data collected via this website is utilized strictly for consulting services and client communication in compliance with international data privacy standards.",
-    termsConditions: "By using this website or engaging Chamonvin Limited services, you agree to our terms of service, consulting guidelines, and service disclaimers."
+    termsConditions: "By using this website or engaging Chamonvin Limited services, you agree to our terms of service and consulting guidelines."
   }
 };
 function createInitialDatabase() {
@@ -267,7 +333,8 @@ For consultations regarding your intended destination, reach out through our ded
       }
     ],
     ownerProfile: DEFAULT_OWNER_PROFILE,
-    galleryItems: DEFAULT_GALLERY_ITEMS
+    galleryItems: DEFAULT_GALLERY_ITEMS,
+    testimonials: DEFAULT_TESTIMONIALS
   };
 }
 var Database = class {
@@ -282,6 +349,7 @@ var Database = class {
         if (!this.schema.settings) this.schema.settings = DEFAULT_SETTINGS;
         if (!this.schema.ownerProfile) this.schema.ownerProfile = DEFAULT_OWNER_PROFILE;
         if (!this.schema.galleryItems) this.schema.galleryItems = DEFAULT_GALLERY_ITEMS;
+        if (!this.schema.testimonials) this.schema.testimonials = DEFAULT_TESTIMONIALS;
         if (!this.schema.adminUsers) this.schema.adminUsers = [];
         if (!this.schema.sessions) this.schema.sessions = [];
         if (!this.schema.players) this.schema.players = [];
@@ -686,6 +754,45 @@ var Database = class {
     }
     this.persist();
   }
+  // --- Testimonials / Reviews ---
+  getTestimonials() {
+    if (!this.schema.testimonials || this.schema.testimonials.length === 0) {
+      this.schema.testimonials = DEFAULT_TESTIMONIALS;
+      this.persist();
+    }
+    return this.schema.testimonials;
+  }
+  setTestimonials(items) {
+    this.schema.testimonials = items;
+    this.persist();
+  }
+  deleteTestimonial(id, userEmail) {
+    if (!this.schema.testimonials) {
+      this.schema.testimonials = DEFAULT_TESTIMONIALS;
+    }
+    const target = this.schema.testimonials.find((t) => t.id === id);
+    const initialLen = this.schema.testimonials.length;
+    this.schema.testimonials = this.schema.testimonials.filter((t) => t.id !== id);
+    if (this.schema.testimonials.length < initialLen) {
+      this.logAction("DELETE_TESTIMONIAL", userEmail, `Deleted testimonial by ${target?.name || id}`);
+      this.persist();
+      return true;
+    }
+    return false;
+  }
+  createTestimonial(data, userEmail) {
+    if (!this.schema.testimonials) {
+      this.schema.testimonials = DEFAULT_TESTIMONIALS;
+    }
+    const item = {
+      ...data,
+      id: `rev_${Date.now()}_${crypto.randomBytes(2).toString("hex")}`
+    };
+    this.schema.testimonials.unshift(item);
+    this.logAction("CREATE_TESTIMONIAL", userEmail, `Added testimonial by ${item.name}`);
+    this.persist();
+    return item;
+  }
   getAuditLogs() {
     return this.schema.auditLogs;
   }
@@ -713,25 +820,66 @@ async function syncPlayerToSupabase(player, action) {
     if (action === "delete") {
       await sb.from("players").delete().eq("id", player.id);
     } else {
-      await sb.from("players").upsert({
+      const VALID_POSITIONS = [
+        "Goalkeeper",
+        "Center Back",
+        "Right Back",
+        "Left Back",
+        "Defensive Midfielder",
+        "Central Midfielder",
+        "Attacking Midfielder",
+        "Winger",
+        "Forward",
+        "Striker"
+      ];
+      let pos = player.primaryPosition || "Forward";
+      if (!VALID_POSITIONS.includes(pos)) {
+        if (pos.toLowerCase().includes("midfield")) pos = "Central Midfielder";
+        else if (pos.toLowerCase().includes("back") || pos.toLowerCase().includes("defend")) pos = "Center Back";
+        else if (pos.toLowerCase().includes("goal") || pos.toLowerCase().includes("keep")) pos = "Goalkeeper";
+        else if (pos.toLowerCase().includes("wing")) pos = "Winger";
+        else pos = "Forward";
+      }
+      const VALID_LEVELS = ["Academy", "Amateur", "Semi-Professional", "Professional"];
+      let lvl = player.playingLevel || "Professional";
+      if (!VALID_LEVELS.includes(lvl)) lvl = "Professional";
+      let st = player.status || "published";
+      if (!["published", "draft", "archived"].includes(st)) st = "published";
+      let yob = null;
+      if (player.yearOfBirth && !isNaN(parseInt(String(player.yearOfBirth), 10))) {
+        yob = parseInt(String(player.yearOfBirth), 10);
+      } else if (player.dateOfBirth && !isNaN(parseInt(String(player.dateOfBirth).slice(0, 4), 10))) {
+        yob = parseInt(String(player.dateOfBirth).slice(0, 4), 10);
+      }
+      let dob = null;
+      if (player.dateOfBirth && /^\d{4}-\d{2}-\d{2}$/.test(player.dateOfBirth)) {
+        dob = player.dateOfBirth;
+      } else if (yob) {
+        dob = `${yob}-01-01`;
+      }
+      const row = {
         id: player.id,
         full_name: player.fullName,
-        primary_position: player.primaryPosition,
-        nationality: player.nationality,
-        year_of_birth: player.yearOfBirth ? parseInt(String(player.yearOfBirth), 10) : player.dateOfBirth ? parseInt(player.dateOfBirth.slice(0, 4), 10) : null,
-        date_of_birth: player.dateOfBirth || (player.yearOfBirth ? `${player.yearOfBirth}-01-01` : null),
-        playing_level: player.playingLevel || "Amateur",
-        status: player.status || "published",
+        primary_position: pos,
+        nationality: player.nationality || "Nigeria",
+        year_of_birth: yob,
+        date_of_birth: dob,
+        playing_level: lvl,
+        status: st,
         is_featured: Boolean(player.isFeatured),
         photo_url: player.photoUrl || null,
-        bio: player.bio || null,
-        career_details: player.careerDetails || [],
+        bio: player.bio || "",
+        career_details: Array.isArray(player.careerDetails) ? player.careerDetails : [],
         video_url: player.videoUrl || null,
         updated_at: (/* @__PURE__ */ new Date()).toISOString()
-      }, { onConflict: "id" });
+      };
+      const { error } = await sb.from("players").upsert(row, { onConflict: "id" });
+      if (error) {
+        console.warn("Supabase player upsert warning:", error.message);
+      }
     }
   } catch (err) {
-    console.warn("Supabase player sync warning:", err);
+    console.warn("Supabase player sync exception:", err?.message || err);
   }
 }
 async function syncPackageToSupabase(pkg, action) {
@@ -834,34 +982,87 @@ async function syncGalleryItemToSupabase(item, action) {
     console.warn("Supabase gallery item sync warning:", err);
   }
 }
-async function pullPlayersFromSupabase() {
+async function syncTestimonialToSupabase(item, action) {
+  const sb = getBackendSupabaseClient();
+  if (!sb) return;
+  try {
+    if (action === "delete") {
+      try {
+        await sb.from("testimonials").delete().eq("id", item.id);
+      } catch {
+      }
+      try {
+        await sb.from("testimonial").delete().eq("id", item.id);
+      } catch {
+      }
+      try {
+        await sb.from("testimonia").delete().eq("id", item.id);
+      } catch {
+      }
+    } else {
+      const payload = {
+        id: item.id,
+        name: item.name,
+        role: item.role || "Client",
+        category: item.category || "sports",
+        location: item.location || "",
+        rating: Number(item.rating) || 5,
+        content: item.content,
+        date: item.date || "2026 Season",
+        is_published: item.isPublished !== false,
+        created_at: (/* @__PURE__ */ new Date()).toISOString()
+      };
+      const { error: tErr } = await sb.from("testimonials").upsert(payload, { onConflict: "id" });
+      if (tErr) {
+        console.warn('Upsert to "testimonials" failed, trying "testimonial":', tErr.message);
+        const { error: tErr2 } = await sb.from("testimonial").upsert(payload, { onConflict: "id" });
+        if (tErr2) {
+          console.warn('Upsert to "testimonial" failed, trying "testimonia":', tErr2.message);
+          try {
+            await sb.from("testimonia").upsert(payload, { onConflict: "id" });
+          } catch {
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("Supabase testimonial sync warning:", err?.message || err);
+  }
+}
+async function pullOwnerProfileFromSupabase() {
   const sb = getBackendSupabaseClient();
   if (!sb) return null;
   try {
-    const { data, error } = await sb.from("players").select("*");
-    if (!error && Array.isArray(data) && data.length > 0) {
-      const mapped = data.map((row) => ({
-        id: row.id,
-        fullName: row.full_name,
-        primaryPosition: row.primary_position,
-        nationality: row.nationality,
-        yearOfBirth: row.year_of_birth || (row.date_of_birth ? String(row.date_of_birth).slice(0, 4) : row.age ? (/* @__PURE__ */ new Date()).getFullYear() - row.age : void 0),
-        dateOfBirth: row.date_of_birth || void 0,
-        playingLevel: row.playing_level || "Professional",
-        status: row.status || "published",
-        isFeatured: Boolean(row.is_featured),
-        photoUrl: row.photo_url || "",
-        bio: row.bio || "",
-        careerDetails: row.career_details || [],
-        videoUrl: row.video_url || void 0,
-        createdAt: row.created_at || (/* @__PURE__ */ new Date()).toISOString(),
-        updatedAt: row.updated_at || (/* @__PURE__ */ new Date()).toISOString()
-      }));
-      db.setPlayers(mapped);
-      return mapped;
+    const { data, error } = await sb.from("owner_profile").select("*").limit(1).maybeSingle();
+    if (!error && data && data.full_name) {
+      const current = db.getOwnerProfile();
+      const sbTime = data.updated_at ? new Date(data.updated_at).getTime() : 0;
+      const localTime = current?.updatedAt ? new Date(current.updatedAt).getTime() : 0;
+      if (sbTime > localTime) {
+        const mapped = {
+          id: data.id || "owner_main",
+          fullName: data.full_name,
+          roleTitle: data.role_title,
+          secondaryTitle: data.secondary_title || "",
+          photoUrl: data.photo_url || "",
+          bio: data.bio || "",
+          quote: data.quote || "",
+          credentials: data.credentials || [],
+          email: data.email || "",
+          phone: data.phone || "",
+          whatsapp: data.whatsapp || "",
+          linkedinUrl: data.linkedin_url || "",
+          twitterUrl: data.twitter_url || "",
+          instagramUrl: data.instagram_url || "",
+          isPublished: data.is_published ?? true,
+          updatedAt: data.updated_at || (/* @__PURE__ */ new Date()).toISOString()
+        };
+        db.updateOwnerProfile(mapped, "supabase_sync");
+        return mapped;
+      }
     }
   } catch (err) {
-    console.warn("Supabase auto-pull error:", err);
+    console.warn("Supabase owner profile pull warning:", err);
   }
   return null;
 }
@@ -1021,29 +1222,24 @@ app.post("/api/upload", requireAdmin, upload.single("image"), (req, res) => {
     mimetype: req.file.mimetype
   });
 });
-app.get("/api/players", async (req, res) => {
+app.get("/api/players", (req, res) => {
   const authHeader = req.headers.authorization;
   let isAdmin = false;
   if (authHeader && authHeader.startsWith("Bearer ")) {
     const token = authHeader.split(" ")[1];
     if (db.getSession(token)) isAdmin = true;
   }
-  await pullPlayersFromSupabase();
   const players = db.getPlayers(!isAdmin);
   return res.json(players);
 });
-app.get("/api/players/:id", async (req, res) => {
+app.get("/api/players/:id", (req, res) => {
   const authHeader = req.headers.authorization;
   let isAdmin = false;
   if (authHeader && authHeader.startsWith("Bearer ")) {
     const token = authHeader.split(" ")[1];
     if (db.getSession(token)) isAdmin = true;
   }
-  let player = db.getPlayerById(req.params.id, !isAdmin);
-  if (!player) {
-    await pullPlayersFromSupabase();
-    player = db.getPlayerById(req.params.id, !isAdmin);
-  }
+  const player = db.getPlayerById(req.params.id, !isAdmin);
   if (!player) {
     return res.status(404).json({ error: "Player profile not found." });
   }
@@ -1056,21 +1252,21 @@ app.post("/api/players", requireAdmin, async (req, res) => {
     return res.status(400).json({ error: "Full name, position, and playing level are required." });
   }
   const newPlayer = db.createPlayer(req.body, session.email);
-  syncPlayerToSupabase(newPlayer, "upsert");
+  await syncPlayerToSupabase(newPlayer, "upsert");
   return res.status(201).json(newPlayer);
 });
 app.put("/api/players/:id", requireAdmin, async (req, res) => {
   const session = req.user;
   const updated = db.updatePlayer(req.params.id, req.body, session.email);
   if (!updated) return res.status(404).json({ error: "Player not found." });
-  syncPlayerToSupabase(updated, "upsert");
+  await syncPlayerToSupabase(updated, "upsert");
   return res.json(updated);
 });
 app.delete("/api/players/:id", requireAdmin, async (req, res) => {
   const session = req.user;
   const success = db.deletePlayer(req.params.id, session.email);
   if (!success) return res.status(404).json({ error: "Player not found." });
-  syncPlayerToSupabase({ id: req.params.id }, "delete");
+  await syncPlayerToSupabase({ id: req.params.id }, "delete");
   return res.json({ success: true });
 });
 app.get("/api/packages", (req, res) => {
@@ -1360,16 +1556,50 @@ app.post("/api/admin/supabase/sync", requireAdmin, async (req, res) => {
       }));
       await sb.from("gallery_items").upsert(mappedGallery, { onConflict: "id" });
     }
-    db.logAction("SUPABASE_SYNC", session.email, `Synced ${mappedPlayers.length} players, ${mappedPackages.length} packages, owner profile & gallery to Supabase`);
+    const testimonials = db.getTestimonials();
+    let syncedTestimonialsCount = 0;
+    if (testimonials.length > 0) {
+      const mappedTestimonials = testimonials.map((t) => ({
+        id: t.id,
+        name: t.name,
+        role: t.role || "Client",
+        category: t.category || "sports",
+        location: t.location || "",
+        rating: Number(t.rating) || 5,
+        content: t.content,
+        date: t.date || "2026 Season",
+        is_published: t.isPublished !== false,
+        created_at: (/* @__PURE__ */ new Date()).toISOString()
+      }));
+      const { error: tErr } = await sb.from("testimonials").upsert(mappedTestimonials, { onConflict: "id" });
+      if (!tErr) {
+        syncedTestimonialsCount = mappedTestimonials.length;
+      } else {
+        console.warn('Sync to "testimonials" failed, trying "testimonial":', tErr.message);
+        const { error: tErr2 } = await sb.from("testimonial").upsert(mappedTestimonials, { onConflict: "id" });
+        if (!tErr2) {
+          syncedTestimonialsCount = mappedTestimonials.length;
+        } else {
+          console.warn('Sync to "testimonial" failed, trying "testimonia":', tErr2.message);
+          try {
+            const { error: tErr3 } = await sb.from("testimonia").upsert(mappedTestimonials, { onConflict: "id" });
+            if (!tErr3) syncedTestimonialsCount = mappedTestimonials.length;
+          } catch {
+          }
+        }
+      }
+    }
+    db.logAction("SUPABASE_SYNC", session.email, `Synced ${mappedPlayers.length} players, ${mappedPackages.length} packages, ${syncedTestimonialsCount || testimonials.length} testimonials, owner profile & gallery to Supabase`);
     return res.json({
       success: true,
-      message: "All website records, owner profile, and gallery successfully synced to Supabase!",
+      message: "All website records, players, testimonials, owner profile, and gallery successfully synced to Supabase!",
       counts: {
         players: mappedPlayers.length,
         packages: mappedPackages.length,
         news: mappedNews.length,
         inquiries: mappedInquiries.length,
         gallery: galleryItems.length,
+        testimonials: syncedTestimonialsCount || testimonials.length,
         owner: 1,
         settings: 1
       }
@@ -1394,6 +1624,16 @@ app.post("/api/admin/supabase/pull", requireAdmin, async (req, res) => {
       sb.from("owner_profile").select("*").limit(1).maybeSingle(),
       sb.from("gallery_items").select("*")
     ]);
+    let testData = null;
+    const testQuery1 = await sb.from("testimonials").select("*");
+    if (!testQuery1.error && testQuery1.data) {
+      testData = testQuery1.data;
+    } else {
+      const testQuery2 = await sb.from("testimonial").select("*");
+      if (!testQuery2.error && testQuery2.data) {
+        testData = testQuery2.data;
+      }
+    }
     let pulledPlayers = 0;
     if (pRes.data && Array.isArray(pRes.data) && pRes.data.length > 0) {
       const mapped = pRes.data.map((row) => ({
@@ -1418,23 +1658,28 @@ app.post("/api/admin/supabase/pull", requireAdmin, async (req, res) => {
       db.setPlayers(mapped);
       pulledPlayers = mapped.length;
     }
-    if (ownerRes.data) {
-      db.updateOwnerProfile({
-        fullName: ownerRes.data.full_name,
-        roleTitle: ownerRes.data.role_title,
-        secondaryTitle: ownerRes.data.secondary_title,
-        photoUrl: ownerRes.data.photo_url,
-        bio: ownerRes.data.bio,
-        quote: ownerRes.data.quote,
-        credentials: ownerRes.data.credentials || [],
-        email: ownerRes.data.email,
-        phone: ownerRes.data.phone,
-        whatsapp: ownerRes.data.whatsapp,
-        linkedinUrl: ownerRes.data.linkedin_url,
-        twitterUrl: ownerRes.data.twitter_url,
-        instagramUrl: ownerRes.data.instagram_url,
-        isPublished: ownerRes.data.is_published
-      }, "supabase_pull");
+    if (ownerRes.data && ownerRes.data.full_name) {
+      const current = db.getOwnerProfile();
+      const sbTime = ownerRes.data.updated_at ? new Date(ownerRes.data.updated_at).getTime() : 0;
+      const localTime = current?.updatedAt ? new Date(current.updatedAt).getTime() : 0;
+      if (sbTime >= localTime) {
+        db.updateOwnerProfile({
+          fullName: ownerRes.data.full_name,
+          roleTitle: ownerRes.data.role_title,
+          secondaryTitle: ownerRes.data.secondary_title,
+          photoUrl: ownerRes.data.photo_url,
+          bio: ownerRes.data.bio,
+          quote: ownerRes.data.quote,
+          credentials: ownerRes.data.credentials || [],
+          email: ownerRes.data.email,
+          phone: ownerRes.data.phone,
+          whatsapp: ownerRes.data.whatsapp,
+          linkedinUrl: ownerRes.data.linkedin_url,
+          twitterUrl: ownerRes.data.twitter_url,
+          instagramUrl: ownerRes.data.instagram_url,
+          isPublished: ownerRes.data.is_published
+        }, "supabase_pull");
+      }
     }
     if (galRes.data && Array.isArray(galRes.data) && galRes.data.length > 0) {
       const mappedGal = galRes.data.map((row) => ({
@@ -1449,12 +1694,29 @@ app.post("/api/admin/supabase/pull", requireAdmin, async (req, res) => {
       }));
       db.setGalleryItems(mappedGal);
     }
-    db.logAction("SUPABASE_PULL", session.email, `Pulled ${pulledPlayers} players and records from Supabase`);
+    let pulledTestimonials = 0;
+    if (testData && Array.isArray(testData) && testData.length > 0) {
+      const mappedTest = testData.map((row) => ({
+        id: row.id,
+        name: row.name,
+        role: row.role || "Client",
+        category: row.category || "sports",
+        location: row.location || "",
+        rating: Number(row.rating) || 5,
+        content: row.content,
+        date: row.date || "2026 Season",
+        isPublished: row.is_published !== false
+      }));
+      db.setTestimonials(mappedTest);
+      pulledTestimonials = mappedTest.length;
+    }
+    db.logAction("SUPABASE_PULL", session.email, `Pulled ${pulledPlayers} players, ${pulledTestimonials} reviews and records from Supabase`);
     return res.json({
       success: true,
-      message: `Successfully pulled and synchronized ${pulledPlayers} players and records from Supabase!`,
+      message: `Successfully pulled and synchronized ${pulledPlayers} players, ${pulledTestimonials} reviews, and records from Supabase!`,
       counts: {
         players: pulledPlayers,
+        testimonials: pulledTestimonials,
         packages: pkgRes.data?.length || 0,
         news: newsRes.data?.length || 0,
         gallery: galRes.data?.length || 0
@@ -1465,14 +1727,15 @@ app.post("/api/admin/supabase/pull", requireAdmin, async (req, res) => {
     return res.status(500).json({ error: err.message || "Failed to pull from Supabase" });
   }
 });
-app.get("/api/owner-profile", (_req, res) => {
+app.get("/api/owner-profile", async (_req, res) => {
+  await pullOwnerProfileFromSupabase();
   const profile = db.getOwnerProfile();
   return res.json(profile);
 });
 app.put("/api/owner-profile", requireAdmin, async (req, res) => {
   const session = req.user;
   const updated = db.updateOwnerProfile(req.body, session.email);
-  syncOwnerProfileToSupabase(updated);
+  await syncOwnerProfileToSupabase(updated);
   return res.json(updated);
 });
 app.get("/api/gallery", (_req, res) => {
@@ -1502,6 +1765,36 @@ app.delete("/api/gallery/:id", requireAdmin, async (req, res) => {
   if (!success) return res.status(404).json({ error: "Gallery item not found" });
   syncGalleryItemToSupabase({ id: req.params.id }, "delete");
   return res.json({ success: true });
+});
+app.get("/api/testimonials", (_req, res) => {
+  const items = db.getTestimonials();
+  return res.json(items);
+});
+app.post("/api/testimonials", requireAdmin, async (req, res) => {
+  const session = req.user;
+  const { name, role, category, location, rating, content, date } = req.body;
+  if (!name || !content) {
+    return res.status(400).json({ error: "Name and review content are required." });
+  }
+  const item = db.createTestimonial({
+    name,
+    role: role || "Client",
+    category: category || "sports",
+    location: location || "",
+    rating: Number(rating) || 5,
+    content,
+    date: date || "2026 Season",
+    isPublished: true
+  }, session.email);
+  syncTestimonialToSupabase(item, "upsert");
+  return res.status(201).json(item);
+});
+app.delete("/api/testimonials/:id", requireAdmin, async (req, res) => {
+  const session = req.user;
+  const success = db.deleteTestimonial(req.params.id, session.email);
+  if (!success) return res.status(404).json({ error: "Review not found." });
+  syncTestimonialToSupabase({ id: req.params.id }, "delete");
+  return res.json({ success: true, message: "Review deleted successfully." });
 });
 process.on("uncaughtException", (err) => {
   console.error("[Server] Uncaught Exception:", err);

@@ -122,10 +122,6 @@ export const SportsManagementPage: React.FC = () => {
             <p className="text-sm text-slate-700 leading-relaxed">
               At Chamonvin Limited, we uphold the highest international ethical standards in sports representation. We operate transparently with players, parents, academies, and clubs.
             </p>
-            <div className="p-4 bg-amber-50/80 border border-amber-200 rounded-lg text-xs text-amber-900 leading-relaxed">
-              <strong className="font-semibold block mb-1">Important Notice on Representation:</strong>
-              Chamonvin Limited does not guarantee professional contracts, trials, transfers, or athletic salaries. Sports management is based on merit, performance evaluation, club requirements, and mutual agreement between sporting institutions and athletes.
-            </div>
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100">
               <span className="text-xs text-slate-500">
                 Are you a player seeking representation or a club seeking talent?

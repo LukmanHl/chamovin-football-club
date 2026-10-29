@@ -4,6 +4,7 @@ import { ArrowRight, Trophy, Compass, CheckCircle2, Globe, Users, Plane, FileChe
 import { HeroSlider } from '../components/common/HeroSlider';
 import { HomeGallery } from '../components/common/HomeGallery';
 import { OwnerCard } from '../components/common/OwnerCard';
+import { TestimonialsSection } from '../components/common/TestimonialsSection';
 import { useSettings } from '../context/SettingsContext';
 import { api } from '../services/api';
 import { Player, NewsArticle } from '../types/index';
@@ -387,7 +388,10 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 7. LATEST NEWS & UPDATES */}
+      {/* 7. CLIENT & ATHLETE TESTIMONIALS */}
+      <TestimonialsSection />
+
+      {/* 8. LATEST NEWS & UPDATES */}
       {latestNews.length > 0 && (
         <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4">

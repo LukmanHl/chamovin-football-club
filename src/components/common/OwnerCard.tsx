@@ -90,7 +90,7 @@ export const OwnerCard: React.FC<OwnerCardProps> = ({ layout = 'full', className
               to="/about#leadership"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-xs sm:text-sm rounded-xl transition-all shadow-md hover:shadow-emerald-900/40 group"
             >
-              <span>View Entire Profile on About Us</span>
+              <span>View Profile</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

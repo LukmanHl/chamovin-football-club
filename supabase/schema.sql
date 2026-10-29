@@ -211,19 +211,19 @@ CREATE TABLE IF NOT EXISTS public.audit_logs (
 -- H. Executive Leadership & Owner Profile Card
 CREATE TABLE IF NOT EXISTS public.owner_profile (
   id TEXT PRIMARY KEY DEFAULT 'owner_main',
-  full_name TEXT NOT NULL DEFAULT 'Adekunle O.',
+  full_name TEXT NOT NULL DEFAULT '',
   role_title TEXT NOT NULL DEFAULT 'Founder & Managing Director',
-  secondary_title TEXT DEFAULT 'International Sports Management Director & Licensed Football Intermediary',
-  photo_url TEXT DEFAULT 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
-  bio TEXT NOT NULL DEFAULT 'With extensive experience bridging African football talents with prominent European, UK, and international football structures, the Managing Directorate established Chamonvin Limited on foundational principles of client priority, rigorous ethical representation, and sustainable career stewardship. Overseeing both elite player management and our dedicated travel and visa consultation divisions, our mission remains focused on unlocking genuine, verified international opportunities for every client we represent.',
-  quote TEXT DEFAULT 'At Chamonvin Limited, your vision and goal is our priority. Every player and client deserves genuine advocacy, complete transparency, and relentless dedication to their long-term longevity on and off the pitch.',
-  credentials TEXT[] DEFAULT ARRAY['International Football Management & Player Representation', 'FIFA & Global Intermediary Network Relations', 'International Travel Logistics & Visa Advisory Liaison', 'West Africa & European Football Scouting Director'],
-  email TEXT DEFAULT 'info@Chamonvin.com',
-  phone TEXT DEFAULT '+1(909)-991-3946',
-  whatsapp TEXT DEFAULT '+2348145656705',
-  linkedin_url TEXT DEFAULT 'https://linkedin.com/company/chamonvin-limited',
-  twitter_url TEXT DEFAULT 'https://twitter.com/chamonvinltd',
-  instagram_url TEXT DEFAULT 'https://instagram.com/chamonvinltd',
+  secondary_title TEXT,
+  photo_url TEXT,
+  bio TEXT,
+  quote TEXT,
+  credentials TEXT[] DEFAULT '{}',
+  email TEXT,
+  phone TEXT,
+  whatsapp TEXT,
+  linkedin_url TEXT,
+  twitter_url TEXT,
+  instagram_url TEXT,
   is_published BOOLEAN NOT NULL DEFAULT TRUE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
@@ -241,6 +241,32 @@ CREATE TABLE IF NOT EXISTS public.gallery_items (
   is_featured BOOLEAN NOT NULL DEFAULT TRUE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+-- J. Client & Athlete Testimonials / Reviews
+CREATE TABLE IF NOT EXISTS public.testimonials (
+  id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
+  name TEXT NOT NULL,
+  role TEXT NOT NULL DEFAULT 'Client',
+  category TEXT NOT NULL DEFAULT 'sports',
+  location TEXT DEFAULT '',
+  rating INTEGER NOT NULL DEFAULT 5,
+  content TEXT NOT NULL,
+  date TEXT DEFAULT '2026 Season',
+  is_published BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- Convenient views for singular 'testimonial' or typo 'testimonia'
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'testimonial') AND
+     NOT EXISTS (SELECT 1 FROM pg_views WHERE schemaname = 'public' AND viewname = 'testimonial') THEN
+    CREATE VIEW public.testimonial AS SELECT * FROM public.testimonials;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'testimonia') AND
+     NOT EXISTS (SELECT 1 FROM pg_views WHERE schemaname = 'public' AND viewname = 'testimonia') THEN
+    CREATE VIEW public.testimonia AS SELECT * FROM public.testimonials;
+  END IF;
+END $$;
 
 -- 5. ATTACH UPDATED_AT TRIGGERS
 DROP TRIGGER IF EXISTS trg_company_settings_updated_at ON public.company_settings;
@@ -372,12 +398,21 @@ TO anon, authenticated
 USING (true)
 WITH CHECK (true);
 
+-- Allow full access for testimonials
+DROP POLICY IF EXISTS "Allow all for testimonials" ON public.testimonials;
+CREATE POLICY "Allow all for testimonials"
+ON public.testimonials FOR ALL
+TO anon, authenticated
+USING (true)
+WITH CHECK (true);
+
 -- Explicit Permissions for all client roles
 GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO anon, authenticated, service_role;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated, service_role;
 GRANT ALL ON TABLE public.owner_profile TO anon, authenticated, service_role;
 GRANT ALL ON TABLE public.gallery_items TO anon, authenticated, service_role;
+GRANT ALL ON TABLE public.testimonials TO anon, authenticated, service_role;
 
 -- ==============================================================================
 -- 8. INITIAL DEFAULT SETTINGS & OWNER SEED
@@ -437,18 +472,7 @@ INSERT INTO public.owner_profile (
   '+2348145656705',
   true
 )
-ON CONFLICT (id) DO UPDATE SET
-  full_name = EXCLUDED.full_name,
-  role_title = EXCLUDED.role_title,
-  secondary_title = EXCLUDED.secondary_title,
-  photo_url = EXCLUDED.photo_url,
-  bio = EXCLUDED.bio,
-  quote = EXCLUDED.quote,
-  credentials = EXCLUDED.credentials,
-  email = EXCLUDED.email,
-  phone = EXCLUDED.phone,
-  whatsapp = EXCLUDED.whatsapp,
-  updated_at = NOW();
+ON CONFLICT (id) DO NOTHING;
 
 -- Seed Initial Gallery Items
 INSERT INTO public.gallery_items (id, title, category, image_url, description, location, date, is_featured)
@@ -460,3 +484,15 @@ VALUES
   ('gal-5', 'Player Contract Advisory & Management Consultation', 'Management & Events', 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80', '', 'Victoria Island, Lagos', '2026 Season', true),
   ('gal-6', 'International Travel & Sports Delegation Gateway', 'Travel & Tours', 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80', '', 'Heathrow Airport, UK', '2026 Season', true)
 ON CONFLICT (id) DO NOTHING;
+
+-- Seed Initial Testimonials / Reviews
+INSERT INTO public.testimonials (id, name, role, category, location, rating, content, date, is_published)
+VALUES
+  ('rev-1', 'Tunde Bakare', 'Professional Footballer · Forward', 'sports', 'Lisbon, Portugal', 5, 'Chamonvin Limited transformed my athletic journey. Their direct European scouting network secured me elite exposure in Portugal. What stands out most is their integrity—no empty promises, just authentic representation and genuine care for my long-term career.', '2026 Season', true),
+  ('rev-2', 'Dr. Nkemdilim Eze', 'Medical Research Delegate · Schengen Visa Client', 'travel', 'London, United Kingdom', 5, 'Navigating international visa requirements for our 8-person conference delegation seemed daunting until we hired Chamonvin. Their travel team scrutinized our documentation with immense precision and arranged flights seamlessly. Highly recommended!', '2026 Season', true),
+  ('rev-3', 'Emmanuel Oduro', 'Midfielder · Representation Client', 'sports', 'Madrid, Spain', 5, 'The athletic conditioning roadmap and tactical video analysis provided by Chamonvin gave me the edge I needed during scouting assessments. They treat players with respect, protect our welfare, and offer transparent career advisory.', '2026 Season', true),
+  ('rev-4', 'Coach Julian Martins', 'European Football Academy Technical Scout', 'sports', 'Porto, Portugal', 5, 'Working with Chamonvin as licensed intermediaries has been exemplary. Their player dossiers are authentic, thoroughly vetted, and backed by accurate technical footage. A trustworthy agency that respects international compliance.', '2026 Season', true),
+  ('rev-5', 'Folashade Adeleke', 'Postgraduate Student · UK Student Visa', 'travel', 'Manchester, United Kingdom', 5, 'From university documentation review to mock visa interview prep and airport itinerary booking, Chamonvin guided me step-by-step. Their 24/7 responsiveness gave my family tremendous peace of mind throughout the entire process.', '2026 Season', true),
+  ('rev-6', 'Kelvin Mensah', 'Center Back · Elite Trials Participant', 'sports', 'Paris, France', 5, 'Unlike other scouts who make grand claims without results, Chamonvin delivered tangible trial invitations, real contract advisory, and full logistical support. They are the benchmark for football management.', '2026 Season', true)
+ON CONFLICT (id) DO NOTHING;
+

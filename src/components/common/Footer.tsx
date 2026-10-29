@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Clock, ArrowUpRight, ShieldCheck, Lock } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, ArrowUpRight } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
 
 export const Footer: React.FC = () => {
@@ -51,8 +51,8 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/#gallery" className="hover:text-emerald-400 transition-colors">
-                  Match & Training Gallery
+                <Link to="/gallery" className="hover:text-emerald-400 transition-colors">
+                  Media & Operations Gallery
                 </Link>
               </li>
               <li>
@@ -162,18 +162,6 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Regulatory & Immigration Disclaimer */}
-        <div className="py-6 border-b border-slate-900 text-[11px] text-slate-500 leading-relaxed">
-          <div className="flex items-start gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-            <p>
-              <strong className="text-slate-400">Notice & Disclaimer:</strong>{' '}
-              {settings?.content.visaDisclaimer ||
-                'All visa, work permit, and immigration decisions are governed solely by national government and consular authorities. Chamonvin Limited provides procedural documentation assessment and strategic travel consultation; we do not guarantee visa approval, entry grants, or foreign employment.'}
-            </p>
-          </div>
-        </div>
-
         {/* Bottom Bar: Copyright & Legal */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <p>© {new Date().getFullYear()} {settings?.companyName || 'CHAMONVIN LIMITED'}. All rights reserved.</p>
@@ -186,14 +174,6 @@ export const Footer: React.FC = () => {
             </Link>
             <Link to="/terms-privacy" className="hover:text-slate-300 transition-colors">
               Terms & Conditions
-            </Link>
-            <Link
-              to="/admin"
-              className="text-slate-500 hover:text-emerald-400 transition-colors flex items-center gap-1 text-[11px]"
-              title="Staff Administration Portal"
-            >
-              <Lock className="w-3 h-3 text-emerald-500/70" />
-              <span>Staff Portal</span>
             </Link>
           </div>
         </div>

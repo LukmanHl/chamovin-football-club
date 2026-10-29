@@ -1,4 +1,4 @@
-import { CompanySettings, Player, TravelPackage, NewsArticle, Inquiry, AuditLog, OwnerProfile, GalleryItem } from '../types/index';
+import { CompanySettings, Player, TravelPackage, NewsArticle, Inquiry, AuditLog, OwnerProfile, GalleryItem, Testimonial } from '../types/index';
 
 const API_BASE = '/api';
 
@@ -236,6 +236,18 @@ export const api = {
     }),
   deleteGalleryItem: (id: string) =>
     fetchJson<{ success: boolean }>(`/gallery/${id}`, {
+      method: 'DELETE'
+    }),
+
+  // Testimonials / Reviews
+  getTestimonials: () => fetchJson<Testimonial[]>('/testimonials'),
+  createTestimonial: (data: Partial<Testimonial>) =>
+    fetchJson<Testimonial>('/testimonials', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    }),
+  deleteTestimonial: (id: string) =>
+    fetchJson<{ success: boolean; message: string }>(`/testimonials/${id}`, {
       method: 'DELETE'
     })
 };

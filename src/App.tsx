@@ -18,6 +18,7 @@ import { VisaConsultationPage } from './pages/VisaConsultationPage';
 import { FlightServicesPage } from './pages/FlightServicesPage';
 import { NewsPage } from './pages/NewsPage';
 import { NewsDetailPage } from './pages/NewsDetailPage';
+import { GalleryPage } from './pages/GalleryPage';
 import { ContactPage } from './pages/ContactPage';
 import { TermsPrivacyPage } from './pages/TermsPrivacyPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -31,6 +32,7 @@ import { AdminInquiriesPage } from './pages/admin/AdminInquiriesPage';
 import { AdminTravelPage } from './pages/admin/AdminTravelPage';
 import { AdminNewsPage } from './pages/admin/AdminNewsPage';
 import { AdminGalleryPage } from './pages/admin/AdminGalleryPage';
+import { AdminTestimonialsPage } from './pages/admin/AdminTestimonialsPage';
 import { AdminAppearancePage } from './pages/admin/AdminAppearancePage';
 import { AdminSettingsPage } from './pages/admin/AdminSettingsPage';
 
@@ -142,6 +144,14 @@ export default function App() {
               }
             />
             <Route
+              path="/gallery"
+              element={
+                <PublicLayout>
+                  <GalleryPage />
+                </PublicLayout>
+              }
+            />
+            <Route
               path="/news"
               element={
                 <PublicLayout>
@@ -182,6 +192,7 @@ export default function App() {
               <Route index element={<AdminOverviewPage />} />
               <Route path="players" element={<AdminPlayersPage />} />
               <Route path="inquiries" element={<AdminInquiriesPage />} />
+              <Route path="testimonials" element={<AdminTestimonialsPage />} />
               <Route path="gallery" element={<AdminGalleryPage />} />
               <Route path="travel" element={<AdminTravelPage />} />
               <Route path="news" element={<AdminNewsPage />} />

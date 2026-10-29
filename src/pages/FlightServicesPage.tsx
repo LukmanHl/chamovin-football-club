@@ -83,22 +83,6 @@ export const FlightServicesPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Distinction & Notice Strip */}
-      <div className="bg-slate-50 border-b border-slate-200 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-start gap-3">
-            <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
-            <div className="text-xs text-slate-700 leading-relaxed">
-              <strong className="text-slate-950 font-semibold block mb-0.5">Booking Inquiry vs Immediate Ticket Issuance:</strong>
-              <p>
-                {settings?.content.flightDisclaimer ||
-                  'Submitting this flight request initiates an itinerary search and reservation review with our travel ticketing specialists. Chamonvin Limited does not charge credit cards on this form. Fares, baggage allotments, and schedules are confirmed directly with you before final ticket issuance.'}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Flight Benefits */}
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

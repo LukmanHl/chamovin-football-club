@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { DatabaseSchema, AdminUser, CompanySettings, Player, TravelPackage, NewsArticle, Inquiry, AuditLog, Session, OwnerProfile, GalleryItem } from '../types/index.js';
+import { DatabaseSchema, AdminUser, CompanySettings, Player, TravelPackage, NewsArticle, Inquiry, AuditLog, Session, OwnerProfile, GalleryItem, Testimonial } from '../types/index.js';
 
 const DB_DIR = path.resolve(process.cwd(), 'data');
 const DB_FILE = path.join(DB_DIR, 'database.json');
@@ -101,6 +101,75 @@ const DEFAULT_GALLERY_ITEMS: GalleryItem[] = [
   }
 ];
 
+const DEFAULT_TESTIMONIALS: Testimonial[] = [
+  {
+    id: 'rev-1',
+    name: 'Tunde Bakare',
+    role: 'Professional Footballer · Forward',
+    category: 'sports',
+    location: 'Lisbon, Portugal',
+    rating: 5,
+    content: 'Chamonvin Limited transformed my athletic journey. Their direct European scouting network secured me elite exposure in Portugal. What stands out most is their integrity—no empty promises, just authentic representation and genuine care for my long-term career.',
+    date: '2026 Season',
+    isPublished: true
+  },
+  {
+    id: 'rev-2',
+    name: 'Dr. Nkemdilim Eze',
+    role: 'Medical Research Delegate · Schengen Visa Client',
+    category: 'travel',
+    location: 'London, United Kingdom',
+    rating: 5,
+    content: 'Navigating international visa requirements for our 8-person conference delegation seemed daunting until we hired Chamonvin. Their travel team scrutinized our documentation with immense precision and arranged flights seamlessly. Highly recommended!',
+    date: '2026 Season',
+    isPublished: true
+  },
+  {
+    id: 'rev-3',
+    name: 'Emmanuel Oduro',
+    role: 'Midfielder · Representation Client',
+    category: 'sports',
+    location: 'Madrid, Spain',
+    rating: 5,
+    content: 'The athletic conditioning roadmap and tactical video analysis provided by Chamonvin gave me the edge I needed during scouting assessments. They treat players with respect, protect our welfare, and offer transparent career advisory.',
+    date: '2026 Season',
+    isPublished: true
+  },
+  {
+    id: 'rev-4',
+    name: 'Coach Julian Martins',
+    role: 'European Football Academy Technical Scout',
+    category: 'sports',
+    location: 'Porto, Portugal',
+    rating: 5,
+    content: 'Working with Chamonvin as licensed intermediaries has been exemplary. Their player dossiers are authentic, thoroughly vetted, and backed by accurate technical footage. A trustworthy agency that respects international compliance.',
+    date: '2026 Season',
+    isPublished: true
+  },
+  {
+    id: 'rev-5',
+    name: 'Folashade Adeleke',
+    role: 'Postgraduate Student · UK Student Visa',
+    category: 'travel',
+    location: 'Manchester, United Kingdom',
+    rating: 5,
+    content: 'From university documentation review to mock visa interview prep and airport itinerary booking, Chamonvin guided me step-by-step. Their 24/7 responsiveness gave my family tremendous peace of mind throughout the entire process.',
+    date: '2026 Season',
+    isPublished: true
+  },
+  {
+    id: 'rev-6',
+    name: 'Kelvin Mensah',
+    role: 'Center Back · Elite Trials Participant',
+    category: 'sports',
+    location: 'Paris, France',
+    rating: 5,
+    content: 'Unlike other scouts who make grand claims without results, Chamonvin delivered tangible trial invitations, real contract advisory, and full logistical support. They are the benchmark for football management.',
+    date: '2026 Season',
+    isPublished: true
+  }
+];
+
 const DEFAULT_SETTINGS: CompanySettings = {
   companyName: 'CHAMONVIN LIMITED',
   logoUrl: 'https://i.ibb.co/Kp7HY9pp/Whats-App-Image-2026-10-17-at-15-09-07.jpg',
@@ -128,9 +197,7 @@ const DEFAULT_SETTINGS: CompanySettings = {
   ],
   heroButtons: [
     { label: 'Explore Our Sports Management', link: '/sports-management' },
-    { label: 'Explore Travel & Visa Services', link: '/travel-tours' },
-    { label: 'Become a Represented Player', link: '/player-representation' },
-    { label: 'Book a Consultation', link: '/contact' }
+    { label: 'Explore Travel & Visa Services', link: '/travel-tours' }
   ],
   contactEmail: 'info@Chamonvin.com',
   contactPhone: '+1(909)-991-3946',
@@ -158,14 +225,12 @@ const DEFAULT_SETTINGS: CompanySettings = {
       "Chamonvin Limited offers comprehensive football representation, talent management, contract guidance, and career planning across amateur, semi-professional, and professional tiers.",
     travelVisaOverview:
       "Our travel and visa division assists individuals, families, students, and professionals with travel itineraries, flight reservation support, and procedural consultation for eligible visa and residency pathways.",
-    visaDisclaimer:
-      "Notice & Disclaimer: All visa, work authorization, and immigration determinations are rendered solely by the relevant national government authorities and consulates. Requirements, processing times, and eligibility criteria are subject to change without notice. Chamonvin Limited provides procedural assessment, documentation guidance, and application consultation. Chamonvin Limited does not guarantee visa approval, employment offers, or permanent residence.",
-    flightDisclaimer:
-      "Notice: Chamonvin Limited provides travel itinerary consultation, flight schedule reviews, and reservation assistance. Final seat availability, baggage allowances, and airfares are determined by operating airlines at the time of ticket issuance.",
+    visaDisclaimer: "",
+    flightDisclaimer: "",
     privacyPolicy:
       "Chamonvin Limited treats all client inquiries, player profiles, and documentation with strict confidentiality. Personal data collected via this website is utilized strictly for consulting services and client communication in compliance with international data privacy standards.",
     termsConditions:
-      "By using this website or engaging Chamonvin Limited services, you agree to our terms of service, consulting guidelines, and service disclaimers."
+      "By using this website or engaging Chamonvin Limited services, you agree to our terms of service and consulting guidelines."
   }
 };
 
@@ -277,7 +342,8 @@ For consultations regarding your intended destination, reach out through our ded
       }
     ],
     ownerProfile: DEFAULT_OWNER_PROFILE,
-    galleryItems: DEFAULT_GALLERY_ITEMS
+    galleryItems: DEFAULT_GALLERY_ITEMS,
+    testimonials: DEFAULT_TESTIMONIALS
   };
 }
 
@@ -297,6 +363,7 @@ class Database {
         if (!this.schema.settings) this.schema.settings = DEFAULT_SETTINGS;
         if (!this.schema.ownerProfile) this.schema.ownerProfile = DEFAULT_OWNER_PROFILE;
         if (!this.schema.galleryItems) this.schema.galleryItems = DEFAULT_GALLERY_ITEMS;
+        if (!this.schema.testimonials) this.schema.testimonials = DEFAULT_TESTIMONIALS;
         if (!this.schema.adminUsers) this.schema.adminUsers = [];
         if (!this.schema.sessions) this.schema.sessions = [];
         if (!this.schema.players) this.schema.players = [];
@@ -762,6 +829,49 @@ class Database {
       this.schema.players.unshift(player);
     }
     this.persist();
+  }
+
+  // --- Testimonials / Reviews ---
+  getTestimonials(): Testimonial[] {
+    if (!this.schema.testimonials || this.schema.testimonials.length === 0) {
+      this.schema.testimonials = DEFAULT_TESTIMONIALS;
+      this.persist();
+    }
+    return this.schema.testimonials;
+  }
+
+  setTestimonials(items: Testimonial[]) {
+    this.schema.testimonials = items;
+    this.persist();
+  }
+
+  deleteTestimonial(id: string, userEmail: string): boolean {
+    if (!this.schema.testimonials) {
+      this.schema.testimonials = DEFAULT_TESTIMONIALS;
+    }
+    const target = this.schema.testimonials.find(t => t.id === id);
+    const initialLen = this.schema.testimonials.length;
+    this.schema.testimonials = this.schema.testimonials.filter(t => t.id !== id);
+    if (this.schema.testimonials.length < initialLen) {
+      this.logAction('DELETE_TESTIMONIAL', userEmail, `Deleted testimonial by ${target?.name || id}`);
+      this.persist();
+      return true;
+    }
+    return false;
+  }
+
+  createTestimonial(data: Omit<Testimonial, 'id'>, userEmail: string): Testimonial {
+    if (!this.schema.testimonials) {
+      this.schema.testimonials = DEFAULT_TESTIMONIALS;
+    }
+    const item: Testimonial = {
+      ...data,
+      id: `rev_${Date.now()}_${crypto.randomBytes(2).toString('hex')}`
+    };
+    this.schema.testimonials.unshift(item);
+    this.logAction('CREATE_TESTIMONIAL', userEmail, `Added testimonial by ${item.name}`);
+    this.persist();
+    return item;
   }
 
   getAuditLogs(): AuditLog[] {

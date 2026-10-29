@@ -199,7 +199,7 @@ export const AdminSettingsPage: React.FC = () => {
     try {
       await api.updateSettings({ content });
       await refreshSettings();
-      setSuccessMsg('Website content and disclaimers updated successfully.');
+      setSuccessMsg('Website content updated successfully.');
       setTimeout(() => setSuccessMsg(null), 4000);
     } catch (err: any) {
       setErrorMsg(err.message || 'Error updating content');
@@ -295,19 +295,19 @@ export const AdminSettingsPage: React.FC = () => {
 -- ==============================================================================
 CREATE TABLE IF NOT EXISTS public.owner_profile (
   id TEXT PRIMARY KEY DEFAULT 'owner_main',
-  full_name TEXT NOT NULL DEFAULT 'Adekunle O.',
+  full_name TEXT NOT NULL DEFAULT '',
   role_title TEXT NOT NULL DEFAULT 'Founder & Managing Director',
-  secondary_title TEXT DEFAULT 'International Sports Management Director & Licensed Football Intermediary',
-  photo_url TEXT DEFAULT 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
-  bio TEXT NOT NULL DEFAULT 'With extensive experience bridging African football talents with prominent European, UK, and international football structures, the Managing Directorate established Chamonvin Limited on foundational principles of client priority, rigorous ethical representation, and sustainable career stewardship.',
-  quote TEXT DEFAULT 'At Chamonvin Limited, your vision and goal is our priority. Every player and client deserves genuine advocacy, complete transparency, and relentless dedication to their long-term longevity on and off the pitch.',
-  credentials TEXT[] DEFAULT ARRAY['International Football Management & Player Representation', 'FIFA & Global Intermediary Network Relations', 'International Travel Logistics & Visa Advisory Liaison', 'West Africa & European Football Scouting Director'],
-  email TEXT DEFAULT 'info@Chamonvin.com',
-  phone TEXT DEFAULT '+1(909)-991-3946',
-  whatsapp TEXT DEFAULT '+2348145656705',
-  linkedin_url TEXT DEFAULT 'https://linkedin.com/company/chamonvin-limited',
-  twitter_url TEXT DEFAULT 'https://twitter.com/chamonvinltd',
-  instagram_url TEXT DEFAULT 'https://instagram.com/chamonvinltd',
+  secondary_title TEXT,
+  photo_url TEXT,
+  bio TEXT,
+  quote TEXT,
+  credentials TEXT[] DEFAULT '{}',
+  email TEXT,
+  phone TEXT,
+  whatsapp TEXT,
+  linkedin_url TEXT,
+  twitter_url TEXT,
+  instagram_url TEXT,
   is_published BOOLEAN NOT NULL DEFAULT TRUE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
@@ -324,35 +324,24 @@ WITH CHECK (true);
 
 GRANT ALL ON TABLE public.owner_profile TO anon, authenticated, service_role;
 
--- Seed default record
+-- Seed default record (only if record does not exist yet)
 INSERT INTO public.owner_profile (
   id, full_name, role_title, secondary_title, photo_url, bio, quote, credentials, email, phone, whatsapp, is_published
 ) VALUES (
   'owner_main',
-  'Adekunle O.',
-  'Founder & Managing Director',
-  'International Sports Management Director & Licensed Football Intermediary',
-  'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
-  'With extensive experience bridging African football talents with prominent European, UK, and international football structures, the Managing Directorate established Chamonvin Limited on foundational principles of client priority, rigorous ethical representation, and sustainable career stewardship.',
-  'At Chamonvin Limited, your vision and goal is our priority. Every player and client deserves genuine advocacy, complete transparency, and relentless dedication to their long-term longevity on and off the pitch.',
-  ARRAY['International Football Management & Player Representation', 'FIFA & Global Intermediary Network Relations', 'International Travel Logistics & Visa Advisory Liaison', 'West Africa & European Football Scouting Director'],
-  'info@Chamonvin.com',
-  '+1(909)-991-3946',
-  '+2348145656705',
+  '${(ownerProfile.fullName || 'Founder & Director').replace(/'/g, "''")}',
+  '${(ownerProfile.roleTitle || 'Founder & Managing Director').replace(/'/g, "''")}',
+  '${(ownerProfile.secondaryTitle || 'International Sports Management Director & Licensed Football Intermediary').replace(/'/g, "''")}',
+  '${(ownerProfile.photoUrl || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80').replace(/'/g, "''")}',
+  '${(ownerProfile.bio || 'With extensive experience bridging African football talents with prominent European, UK, and international football structures, the Managing Directorate established Chamonvin Limited on foundational principles of client priority, rigorous ethical representation, and sustainable career stewardship.').replace(/'/g, "''")}',
+  '${(ownerProfile.quote || 'At Chamonvin Limited, your vision and goal is our priority. Every player and client deserves genuine advocacy, complete transparency, and relentless dedication to their long-term longevity on and off the pitch.').replace(/'/g, "''")}',
+  ARRAY[${(ownerProfile.credentials || ['International Football Management & Player Representation', 'FIFA & Global Intermediary Network Relations', 'International Travel Logistics & Visa Advisory Liaison', 'West Africa & European Football Scouting Director']).map(c => `'${c.replace(/'/g, "''")}'`).join(', ')}],
+  '${(ownerProfile.email || 'info@Chamonvin.com').replace(/'/g, "''")}',
+  '${(ownerProfile.phone || '+1(909)-991-3946').replace(/'/g, "''")}',
+  '${(ownerProfile.whatsapp || '+2348145656705').replace(/'/g, "''")}',
   true
 )
-ON CONFLICT (id) DO UPDATE SET
-  full_name = EXCLUDED.full_name,
-  role_title = EXCLUDED.role_title,
-  secondary_title = EXCLUDED.secondary_title,
-  photo_url = EXCLUDED.photo_url,
-  bio = EXCLUDED.bio,
-  quote = EXCLUDED.quote,
-  credentials = EXCLUDED.credentials,
-  email = EXCLUDED.email,
-  phone = EXCLUDED.phone,
-  whatsapp = EXCLUDED.whatsapp,
-  updated_at = NOW();
+ON CONFLICT (id) DO NOTHING;
 `;
     try {
       if (navigator.clipboard) {
@@ -564,7 +553,7 @@ GRANT ALL ON TABLE public.gallery_items TO anon, authenticated, service_role;
               : 'text-slate-600 hover:text-slate-950'
           }`}
         >
-          CMS Page Text & Disclaimers
+          CMS Page Content
         </button>
         <button
           onClick={() => setActiveTab('owner')}
@@ -769,27 +758,29 @@ GRANT ALL ON TABLE public.gallery_items TO anon, authenticated, service_role;
 
           <div className="pt-3 border-t border-slate-100 space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
-              Regulatory Disclaimers (Required)
+              Regulatory Disclaimers (Optional — Leave blank to hide completely)
             </h3>
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Visa and Immigration Regulatory Disclaimer
+                Visa and Immigration Regulatory Disclaimer (Optional)
               </label>
               <textarea
-                rows={3}
+                rows={2}
                 value={content.visaDisclaimer}
                 onChange={(e) => setContent({ ...content, visaDisclaimer: e.target.value })}
+                placeholder="Leave blank to omit disclaimers entirely"
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded focus:outline-none"
               />
             </div>
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Flight Ticketing Notice & Disclaimer
+                Flight Ticketing Notice & Disclaimer (Optional)
               </label>
               <textarea
                 rows={2}
                 value={content.flightDisclaimer}
                 onChange={(e) => setContent({ ...content, flightDisclaimer: e.target.value })}
+                placeholder="Leave blank to omit disclaimers entirely"
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded focus:outline-none"
               />
             </div>
@@ -800,7 +791,7 @@ GRANT ALL ON TABLE public.gallery_items TO anon, authenticated, service_role;
             disabled={saving}
             className="px-6 py-2.5 text-xs font-semibold text-white bg-emerald-700 hover:bg-emerald-800 rounded-md transition-colors"
           >
-            {saving ? 'Saving...' : 'Save CMS Text & Disclaimers'}
+            {saving ? 'Saving...' : 'Save CMS Content'}
           </button>
         </form>
       )}
@@ -1254,6 +1245,11 @@ GRANT ALL ON TABLE public.gallery_items TO anon, authenticated, service_role;
                       {syncResult.counts.gallery !== undefined && (
                         <span className="bg-emerald-200/60 text-emerald-900 px-2.5 py-1 rounded-md">
                           📸 {syncResult.counts.gallery} Gallery Items
+                        </span>
+                      )}
+                      {syncResult.counts.testimonials !== undefined && (
+                        <span className="bg-emerald-200/60 text-emerald-900 px-2.5 py-1 rounded-md">
+                          💬 {syncResult.counts.testimonials} Testimonials & Reviews
                         </span>
                       )}
                       <span className="bg-emerald-200/60 text-emerald-900 px-2.5 py-1 rounded-md">

@@ -38,31 +38,18 @@ export const TermsPrivacyPage: React.FC = () => {
         </section>
 
         {/* Terms of Service */}
-        <section className="space-y-4 border-b border-slate-200 pb-10">
+        <section className="space-y-4">
           <h2 className="text-xl font-bold text-slate-950">2. Terms of Service & Representation Guidelines</h2>
           <div className="text-sm text-slate-700 leading-relaxed space-y-3">
             <p>
               {settings?.content.termsConditions ||
-                'By using this website or engaging Chamonvin Limited services, you agree to our terms of service, consulting guidelines, and service disclaimers.'}
+                'By using this website or engaging Chamonvin Limited services, you agree to our terms of service and consulting guidelines.'}
             </p>
             <p>
               <strong>Representation Nature:</strong> Submitting an application or inquiry via this website does not constitute a binding representation agreement or guarantee of club trials, professional transfers, or athletic contracts.
             </p>
             <p>
               <strong>Accuracy of Client Data:</strong> Prospective players and travelers confirm that all submitted details, athletic statistics, and documents are truthful and accurate.
-            </p>
-          </div>
-        </section>
-
-        {/* Regulatory Disclaimers */}
-        <section className="space-y-4">
-          <h2 className="text-xl font-bold text-slate-950">3. Regulatory & Immigration Disclaimers</h2>
-          <div className="text-sm text-slate-700 leading-relaxed space-y-3 bg-slate-50 p-6 rounded-xl border border-slate-200">
-            <p>
-              <strong>Visa & Immigration Disclaimers:</strong> {settings?.content.visaDisclaimer}
-            </p>
-            <p>
-              <strong>Flight Ticketing Disclaimers:</strong> {settings?.content.flightDisclaimer}
             </p>
           </div>
         </section>

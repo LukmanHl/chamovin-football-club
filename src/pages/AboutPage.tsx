@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ShieldCheck, Target, Eye, HeartHandshake, CheckCircle2, ArrowRight } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
 import { OwnerCard } from '../components/common/OwnerCard';
+import { TestimonialsSection } from '../components/common/TestimonialsSection';
 
 export const AboutPage: React.FC = () => {
   const { settings } = useSettings();
@@ -222,6 +223,9 @@ export const AboutPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
     </div>
   );
 };

@@ -213,12 +213,25 @@ export interface AuditLog {
   details: string;
 }
 
+export interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  category: 'sports' | 'travel';
+  location: string;
+  rating: number;
+  content: string;
+  date: string;
+  isPublished?: boolean;
+}
+
 export interface DatabaseSchema {
   adminUsers: AdminUser[];
   sessions: Session[];
   settings: CompanySettings;
   ownerProfile: OwnerProfile;
   galleryItems: GalleryItem[];
+  testimonials: Testimonial[];
   players: Player[];
   travelPackages: TravelPackage[];
   newsArticles: NewsArticle[];

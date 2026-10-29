@@ -12,10 +12,16 @@
   ],
   "sessions": [
     {
-      "token": "f1623001c70ca6e3f327b372c231824be5e249517a9ca47b6ce49124ba2e2fa6",
+      "token": "8fa12b26691025f4b4b797bff5bc64af98790e70d02c4619d1e446b8b1d09a48",
       "userId": "admin_1",
       "email": "admin@chamonvin.com",
-      "expiresAt": 1793094440858
+      "expiresAt": 1793192853316
+    },
+    {
+      "token": "0243aa7e561e83a70b3771204ef332953e645b3d68cecdd4ff9de4df569ddadd",
+      "userId": "admin_1",
+      "email": "admin@chamonvin.com",
+      "expiresAt": 1793264519173
     }
   ],
   "settings": {
@@ -51,14 +57,6 @@
       {
         "label": "Explore Travel & Visa Services",
         "link": "/travel-tours"
-      },
-      {
-        "label": "Become a Represented Player",
-        "link": "/player-representation"
-      },
-      {
-        "label": "Book a Consultation",
-        "link": "/contact"
       }
     ],
     "contactEmail": "info@Chamonvin.com",
@@ -79,11 +77,10 @@
       "aboutValues": "Client Priority, Absolute Integrity, International Excellence, Professional Confidentiality, and Long-Term Career Stewardship.",
       "aboutPhilosophy": "We understand what it takes to pursue success at the highest level. We help our clients navigate their careers, identify suitable opportunities, and make informed decisions at every stage of their journey.",
       "sportsManagementOverview": "Chamonvin Limited offers comprehensive football representation, talent management, contract guidance, and career planning across amateur, semi-professional, and professional tiers.",
-      "travelVisaOverview": "Our travel and visa division assists individuals, families, students, and professionals with travel itineraries, flight reservation support, and procedural consultation for eligible visa and residency pathways.",
-      "visaDisclaimer": "Notice & Disclaimer: All visa, work authorization, and immigration determinations are rendered solely by the relevant national government authorities and consulates. Requirements, processing times, and eligibility criteria are subject to change without notice. Chamonvin Limited provides procedural assessment, documentation guidance, and application consultation. Chamonvin Limited does not guarantee visa approval, employment offers, or permanent residence.",
-      "flightDisclaimer": "Notice: Chamonvin Limited provides travel itinerary consultation, flight schedule reviews, and reservation assistance. Final seat availability, baggage allowances, and airfares are determined by operating airlines at the time of ticket issuance.",
+      "visaDisclaimer": "",
+      "flightDisclaimer": "",
       "privacyPolicy": "Chamonvin Limited treats all client inquiries, player profiles, and documentation with strict confidentiality. Personal data collected via this website is utilized strictly for consulting services and client communication in compliance with international data privacy standards.",
-      "termsConditions": "By using this website or engaging Chamonvin Limited services, you agree to our terms of service, consulting guidelines, and service disclaimers."
+      "termsConditions": "By using this website or engaging Chamonvin Limited services, you agree to our terms of service and consulting guidelines."
     },
     "supabase": {
       "projectUrl": "https://gnxunqkercbqghosnbvq.supabase.co",
@@ -94,11 +91,11 @@
   },
   "ownerProfile": {
     "id": "owner_main",
-    "fullName": "Adekunle O.",
-    "roleTitle": "Founder & Managing Director",
+    "fullName": "New Test Owner",
+    "roleTitle": "Chief Executive Officer",
     "secondaryTitle": "International Sports Management Director & Licensed Football Intermediary",
     "photoUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
-    "bio": "With extensive experience bridging African football talents with prominent European, UK, and international football structures, the Managing Directorate established Chamonvin Limited on foundational principles of client priority, rigorous ethical representation, and sustainable career stewardship. Overseeing both elite player management and our dedicated travel and visa consultation divisions, our mission remains focused on unlocking genuine, verified international opportunities for every client we represent.",
+    "bio": "Updated custom bio",
     "quote": "At Chamonvin Limited, your vision and goal is our priority. Every player and client deserves genuine advocacy, complete transparency, and relentless dedication to their long-term longevity on and off the pitch.",
     "credentials": [
       "International Football Management & Player Representation",
@@ -113,7 +110,7 @@
     "twitterUrl": "https://twitter.com/chamonvinltd",
     "instagramUrl": "https://instagram.com/chamonvinltd",
     "isPublished": true,
-    "updatedAt": "2026-10-20T22:25:00.000Z"
+    "updatedAt": "2026-10-27T13:11:30.275Z"
   },
   "galleryItems": [
     {
@@ -278,6 +275,48 @@
   "inquiries": [],
   "auditLogs": [
     {
+      "id": "log_1793178147893_edb0",
+      "timestamp": "2026-10-28T09:02:27.893Z",
+      "action": "DELETE_TESTIMONIAL",
+      "user": "admin@chamonvin.com",
+      "details": "Deleted testimonial by Coach Julian Martins"
+    },
+    {
+      "id": "log_1793178144136_2918",
+      "timestamp": "2026-10-28T09:02:24.136Z",
+      "action": "DELETE_TESTIMONIAL",
+      "user": "admin@chamonvin.com",
+      "details": "Deleted testimonial by Folashade Adeleke"
+    },
+    {
+      "id": "log_1793178119174_1a6a",
+      "timestamp": "2026-10-28T09:01:59.174Z",
+      "action": "LOGIN_SUCCESS",
+      "user": "admin@chamonvin.com",
+      "details": "Successful login from ::ffff:127.0.0.1"
+    },
+    {
+      "id": "log_1793106690275_c9b1",
+      "timestamp": "2026-10-27T13:11:30.276Z",
+      "action": "UPDATE_OWNER_PROFILE",
+      "user": "supabase_sync",
+      "details": "Updated owner & executive profile"
+    },
+    {
+      "id": "log_1793106457140_0798",
+      "timestamp": "2026-10-27T13:07:37.140Z",
+      "action": "UPDATE_OWNER_PROFILE",
+      "user": "admin@chamonvin.com",
+      "details": "Updated owner & executive profile"
+    },
+    {
+      "id": "log_1793106453317_e6f4",
+      "timestamp": "2026-10-27T13:07:33.317Z",
+      "action": "LOGIN_SUCCESS",
+      "user": "admin@chamonvin.com",
+      "details": "Successful login from ::ffff:127.0.0.1"
+    },
+    {
       "id": "log_1793008438550_83d6",
       "timestamp": "2026-10-26T09:53:58.550Z",
       "action": "SETTINGS_UPDATE",
@@ -297,6 +336,52 @@
       "action": "SYSTEM_INIT",
       "user": "system",
       "details": "Initial database bootstrapped with official company parameters and secure admin role."
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "rev-1",
+      "name": "Tunde Bakare",
+      "role": "Professional Footballer · Forward",
+      "category": "sports",
+      "location": "Lisbon, Portugal",
+      "rating": 5,
+      "content": "Chamonvin Limited transformed my athletic journey. Their direct European scouting network secured me elite exposure in Portugal. What stands out most is their integrity—no empty promises, just authentic representation and genuine care for my long-term career.",
+      "date": "2026 Season",
+      "isPublished": true
+    },
+    {
+      "id": "rev-2",
+      "name": "Dr. Nkemdilim Eze",
+      "role": "Medical Research Delegate · Schengen Visa Client",
+      "category": "travel",
+      "location": "London, United Kingdom",
+      "rating": 5,
+      "content": "Navigating international visa requirements for our 8-person conference delegation seemed daunting until we hired Chamonvin. Their travel team scrutinized our documentation with immense precision and arranged flights seamlessly. Highly recommended!",
+      "date": "2026 Season",
+      "isPublished": true
+    },
+    {
+      "id": "rev-3",
+      "name": "Emmanuel Oduro",
+      "role": "Midfielder · Representation Client",
+      "category": "sports",
+      "location": "Madrid, Spain",
+      "rating": 5,
+      "content": "The athletic conditioning roadmap and tactical video analysis provided by Chamonvin gave me the edge I needed during scouting assessments. They treat players with respect, protect our welfare, and offer transparent career advisory.",
+      "date": "2026 Season",
+      "isPublished": true
+    },
+    {
+      "id": "rev-6",
+      "name": "Kelvin Mensah",
+      "role": "Center Back · Elite Trials Participant",
+      "category": "sports",
+      "location": "Paris, France",
+      "rating": 5,
+      "content": "Unlike other scouts who make grand claims without results, Chamonvin delivered tangible trial invitations, real contract advisory, and full logistical support. They are the benchmark for football management.",
+      "date": "2026 Season",
+      "isPublished": true
     }
   ]
 }
